@@ -1,0 +1,15 @@
+.app-guide-h2-title {
+  font-weight: 900;
+  color: var(--app-main-color);
+  font-size: 30px;
+}
+.app-guide-h3-title {
+  color: white;
+  background-color: var(--app-main-color);
+  border-radius: 5px;
+  width: fit-content;
+  padding: 3px 10px;
+  margin: 0px;
+  margin-bottom: 10px;
+  font-weight: 400;
+}

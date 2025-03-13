@@ -4,6 +4,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev:guide": "turbo run guide#dev",
+    "docker-build:guide": "docker build -t rui-guide-image -f ./apps/guide/Dockerfile .",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"

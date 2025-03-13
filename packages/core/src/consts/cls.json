@@ -1,0 +1,33 @@
+{
+  "prefixCls": "hw-rui",
+  "button": {
+    "base": "button",
+    "icon": "button-icon"
+  },
+  "accordion": {
+    "base": "accordion",
+    "trigger": "accordion-trigger",
+    "triggerButton": "accordion-trigger-button",
+    "region": "accordion-region"
+  },
+  "popover": {
+    "base": "popover",
+    "trigger": "popover-trigger",
+    "triggerButton": "popover-trigger-button",
+    "content": "popover-content"
+  },
+  "select": {
+    "base": "select",
+    "trigger": "select-trigger",
+    "selectedValue": "select-selected-value",
+    "content": "select-content",
+    "item": "select-item"
+  },
+  "toast": {
+    "base": "toast",
+    "toaster": "toaster",
+    "toastTitle": "toast-title",
+    "toastDescription": "toast-dscription",
+    "toastClose": "toast-close"
+  }
+}

@@ -3,7 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "exports": {
-    "./*": "./src/*.tsx"
+    "./Accordion": "./src/components/Accordion/index.tsx",
+    "./Button": "./src/components/Button/index.tsx",
+    "./Popover": "./src/components/Popover/index.tsx",
+    "./Select": "./src/components/Select/index.tsx",
+    "./Toast": "./src/components/Toast/index.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
@@ -13,6 +17,7 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@repo/core": "workspace:*",
     "@turbo/gen": "^2.4.4",
     "@types/node": "^22.13.9",
     "@types/react": "19.0.10",
