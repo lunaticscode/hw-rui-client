@@ -2,6 +2,7 @@
   "name": "@repo/ui",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "exports": {
     "./Accordion": "./src/components/Accordion/index.tsx",
     "./Button": "./src/components/Button/index.tsx",
@@ -11,18 +12,29 @@
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
+    "build": "tsc -b && rollup -c",
     "generate:component": "turbo gen react-component",
     "check-types": "tsc --noEmit"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@repo/core": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
-    "@repo/core": "workspace:*",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
     "@turbo/gen": "^2.4.4",
     "@types/node": "^22.13.9",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
     "eslint": "^9.22.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
     "typescript": "5.8.2"
   },
   "dependencies": {
