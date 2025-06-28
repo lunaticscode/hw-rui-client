@@ -1,0 +1,56 @@
+import { createContext, useMemo, useState } from "react";
+import {
+  CalendarContextProps,
+  CalendarProps,
+  CalendarMode,
+  CalendarDate,
+} from "./types";
+import { useControlledValue, useUIContext } from "@repo/core/hooks";
+import { calendarCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@repo/core/utils";
+
+const CalendarContext = createContext<CalendarContextProps | null>(null);
+export const useCalendarContext = () =>
+  useUIContext(CalendarContext, "CalendarContext");
+
+const Calendar: CalendarProps = (props) => {
+  const {
+    children,
+    value: valueProp,
+    defaultValue: defaultValueProp = new Date(),
+    className: classNameProp,
+    onChange,
+  } = props;
+  const [mode, setMode] = useState<CalendarMode>("month");
+  const { value: selectedValue, setValue } = useControlledValue(
+    valueProp,
+    defaultValueProp
+  );
+
+  const handleChangeMode = (mode: CalendarMode) => {
+    setMode(mode);
+  };
+  const handleChangeSelectedValue = (date: CalendarDate) => {
+    setValue(date);
+    onChange?.(date);
+  };
+
+  const contextValue: CalendarContextProps = useMemo(
+    () => ({
+      mode,
+      handleChangeMode,
+      selectedValue: selectedValue ?? new Date(),
+      handleChangeSelectedValue,
+    }),
+    [mode, selectedValue, handleChangeMode, handleChangeSelectedValue]
+  );
+
+  return (
+    <CalendarContext.Provider value={contextValue}>
+      <div className={getMergedInjectedClassName(calendarCls, classNameProp)}>
+        {children}
+      </div>
+    </CalendarContext.Provider>
+  );
+};
+export default Calendar;

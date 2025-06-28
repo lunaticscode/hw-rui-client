@@ -10,6 +10,11 @@
     "triggerButton": "accordion-trigger-button",
     "region": "accordion-region"
   },
+  "calendar": {
+    "base": "calendar",
+    "current": "calendar-current",
+    "todayButton": "calendar-today-button"
+  },
   "popover": {
     "base": "popover",
     "trigger": "popover-trigger",
@@ -22,6 +27,9 @@
     "selectedValue": "select-selected-value",
     "content": "select-content",
     "item": "select-item"
+  },
+  "tabs": {
+    "base": "tabs"
   },
   "toast": {
     "base": "toast",
