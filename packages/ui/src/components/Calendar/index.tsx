@@ -8,12 +8,23 @@ import {
 import { useControlledValue, useUIContext } from "@repo/core/hooks";
 import { calendarCls } from "@repo/core/consts";
 import { getMergedInjectedClassName } from "@repo/core/utils";
+import CalendarCurrent from "./CalendarCurrent";
+import CalendarNavigator from "./CalendarNavigator";
+import CalendarToday from "./CalendarToday";
+import CalendarBody from "./CalendarBody";
+
+type CalendarCompoundProps = {
+  Current: typeof CalendarCurrent;
+  Navigator: typeof CalendarNavigator;
+  Today: typeof CalendarToday;
+  Body: typeof CalendarBody;
+};
 
 const CalendarContext = createContext<CalendarContextProps | null>(null);
 export const useCalendarContext = () =>
   useUIContext(CalendarContext, "CalendarContext");
 
-const Calendar: CalendarProps = (props) => {
+const Calendar: CalendarProps & CalendarCompoundProps = (props) => {
   const {
     children,
     value: valueProp,
@@ -53,4 +64,10 @@ const Calendar: CalendarProps = (props) => {
     </CalendarContext.Provider>
   );
 };
+
+Calendar.Current = CalendarCurrent;
+Calendar.Navigator = CalendarNavigator;
+Calendar.Today = CalendarToday;
+Calendar.Body = CalendarBody;
+
 export default Calendar;
