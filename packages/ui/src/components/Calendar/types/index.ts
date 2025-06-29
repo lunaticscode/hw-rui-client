@@ -1,12 +1,15 @@
 import { FC, PropsWithChildren } from "react";
+import { CalendarModes } from "../consts";
 
 export type CalendarDate = Date;
-export type CalendarMode = "month" | "week";
+export type CalendarMode = (typeof CalendarModes)[number];
+
 type CalendarOptionalProps = Partial<{
   className?: string;
   value: CalendarDate;
   onChange: (date: CalendarDate) => void;
   defaultValue: CalendarDate;
+  defaultMode: CalendarMode;
 }>;
 type CalendarRequiredProps = {};
 

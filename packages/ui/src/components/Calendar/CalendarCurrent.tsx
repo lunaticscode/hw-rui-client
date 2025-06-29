@@ -1,7 +1,7 @@
 import { getMergedInjectedClassName } from "@repo/core/utils";
 import { useCalendarContext } from ".";
 import { CalendarCurrentProps } from "./types/calendarCurrent";
-import { getFormatedByMode } from "./utils/dateFormat";
+import { getFormatedCurrentByMode } from "./utils/dateFormat";
 import { calendarCurrentCls } from "@repo/core/consts";
 import { useMemo } from "react";
 
@@ -17,6 +17,8 @@ const CalendarCurrent: CalendarCurrentProps = (props) => {
   if (children && typeof children === "function") {
     return <div className={cls}>{children(selectedValue)}</div>;
   }
-  return <div className={cls}>{getFormatedByMode(selectedValue, mode)}</div>;
+  return (
+    <div className={cls}>{getFormatedCurrentByMode(selectedValue, mode)}</div>
+  );
 };
 export default CalendarCurrent;

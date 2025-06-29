@@ -13,7 +13,10 @@
   "calendar": {
     "base": "calendar",
     "current": "calendar-current",
-    "todayButton": "calendar-today-button"
+    "todayButton": "calendar-today-button",
+    "body": "calendar-body",
+    "dateCell": "calendar-datecell",
+    "navigator": "calendar-navigator"
   },
   "popover": {
     "base": "popover",

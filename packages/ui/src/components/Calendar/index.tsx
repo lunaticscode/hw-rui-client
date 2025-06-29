@@ -29,10 +29,11 @@ const Calendar: CalendarProps & CalendarCompoundProps = (props) => {
     children,
     value: valueProp,
     defaultValue: defaultValueProp = new Date(),
+    defaultMode: defaultModeProp = "month",
     className: classNameProp,
     onChange,
   } = props;
-  const [mode, setMode] = useState<CalendarMode>("month");
+  const [mode, setMode] = useState<CalendarMode>(defaultModeProp);
   const { value: selectedValue, setValue } = useControlledValue(
     valueProp,
     defaultValueProp
