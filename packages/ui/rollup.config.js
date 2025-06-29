@@ -20,7 +20,7 @@ const getBasePkgJson = (component = "") => ({
   name: `@hw-rui/${component.toLowerCase()}`,
   main: "./index.cjs",
   module: "./index.js",
-  types: "./types/index.d.ts",
+  types: "./index.d.ts",
   dependencies: {
     "@hw-rui/core": "^0.1.0",
   },
@@ -48,7 +48,7 @@ const createPkgJsonPlugin = (component) => {
 
 /**
  * @param {string} component
- * @returns {import("rollup").InputOption}
+ * @returns {import("rollup").InputOptions}
  */
 const getBaseRollupOption = (component) => {
   return {
