@@ -250,6 +250,9 @@ importers:
 
   packages/ui:
     dependencies:
+      '@hw-rui/core':
+        specifier: workspace:*
+        version: link:../core
       react:
         specifier: ^19.0.0
         version: 19.0.0
@@ -269,9 +272,6 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.26.0
         version: 7.26.0(@babel/core@7.27.7)
-      '@repo/core':
-        specifier: workspace:*
-        version: link:../core
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config

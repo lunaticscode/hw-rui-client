@@ -2,7 +2,7 @@ import { FC, RefObject, useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { PopoverContentPositions } from "../types";
 import { PopoverContentPortalProps } from "../types/popoverContent";
-import { useOutsideClick } from "@repo/core/hooks";
+import { useOutsideClick } from "@hw-rui/core/hooks";
 import { usePopoverContext } from "..";
 
 type ContentPositionValue = { x: number; y: number };

@@ -1,7 +1,7 @@
-import { getMergedInjectedClassName } from "@repo/core/utils";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import useCalendarDates from "./hooks/useCalendarDates";
 import { CalendarBodyProps } from "./types/calendarBody";
-import { calendarBodyCls } from "@repo/core/consts";
+import { calendarBodyCls } from "@hw-rui/core/consts";
 import { useMemo } from "react";
 import { useCalendarContext } from ".";
 import { CalendarDate } from "./types";

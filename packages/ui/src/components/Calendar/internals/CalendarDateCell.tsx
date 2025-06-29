@@ -1,8 +1,8 @@
-import { getMergedInjectedClassName } from "@repo/core/utils";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import { useCalendarContext } from "..";
 import { CalendarDateCellProps } from "../types/calendarDateCell";
 import { getFormatedDateCellByMode } from "../utils/dateFormat";
-import { calendarDateCellCls } from "@repo/core/consts";
+import { calendarDateCellCls } from "@hw-rui/core/consts";
 import { useMemo } from "react";
 
 const CalendarDateCell: CalendarDateCellProps = (props) => {

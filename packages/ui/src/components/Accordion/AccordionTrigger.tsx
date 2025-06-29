@@ -6,8 +6,8 @@ import { useAccordionContext } from ".";
 import {
   accordionTriggerCls,
   accordionTriggerButtonCls,
-} from "@repo/core/consts";
-import { getMergedInjectedClassName } from "@repo/core/utils";
+} from "@hw-rui/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 const AccordionTrigger: FC<AccordionTriggerProps> = (props) => {
   const { expandedIds, handleChangeExpanded } = useAccordionContext();
   const { children, className, ...controlledProps } = props;

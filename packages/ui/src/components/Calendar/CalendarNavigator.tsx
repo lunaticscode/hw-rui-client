@@ -1,8 +1,8 @@
-import { getMergedInjectedClassName } from "@repo/core/utils";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import { useCalendarContext } from ".";
 import { CalendarNavigatorProps } from "./types/calendarNavigator";
 import { useMemo } from "react";
-import { calendarNavigatorCls } from "@repo/core/consts";
+import { calendarNavigatorCls } from "@hw-rui/core/consts";
 import getDateFromNavigator from "./utils/getDateFromNavigator";
 
 const CalendarNavigator: CalendarNavigatorProps = (props) => {

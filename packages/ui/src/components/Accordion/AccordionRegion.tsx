@@ -3,8 +3,8 @@ import { AccordionRegionProps } from "./types/accordionRegion";
 import { accordionRegionDefaultProps } from "./consts/defaultProps";
 import { useAccordionContext } from ".";
 
-import { accordionRegionCls } from "@repo/core/consts";
-import { getMergedInjectedClassName } from "@repo/core/utils";
+import { accordionRegionCls } from "@hw-rui/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 const AccordionRegion: FC<AccordionRegionProps> = (props) => {
   const { expandedIds } = useAccordionContext();
   const { className, children, ...controlledProps } = props;

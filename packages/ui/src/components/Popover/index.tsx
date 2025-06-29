@@ -8,12 +8,12 @@ import {
   useState,
 } from "react";
 import { PopoverProps, PopoverContextProps, PopoverRefProps } from "./types";
-import { getMergedInjectedClassName } from "@repo/core/utils";
-import { popoverCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+import { popoverCls } from "@hw-rui/core/consts";
 import { popoverDefaultProps } from "./consts/defaultProps";
 import PopoverContent from "./PopoverContent";
 import PopoverTrigger from "./PopoverTrigger";
-import { useUIContext } from "@repo/core/hooks";
+import { useUIContext } from "@hw-rui/core/hooks";
 
 const PopoverContext = createContext<PopoverContextProps | null>(null);
 

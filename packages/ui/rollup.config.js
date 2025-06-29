@@ -21,9 +21,9 @@ const getBasePkgJson = (component = "") => ({
   main: "./index.cjs",
   module: "./index.js",
   types: "./types/index.d.ts",
-  //   dependencies: {
-  //     "@hw-rui/core": "^0.1.0",
-  //   },
+  dependencies: {
+    "@hw-rui/core": "^0.1.0",
+  },
 });
 
 /**
@@ -55,10 +55,10 @@ const getBaseRollupOption = (component) => {
     external: [
       "react",
       "react-dom",
-      "@repo/core",
-      "@repo/core/consts",
-      "@repo/core/utils",
-      "@repo/core/hooks",
+      "@hw-rui/core",
+      "@hw-rui/core/consts",
+      "@hw-rui/core/utils",
+      "@hw-rui/core/hooks",
     ],
     input: `./src/${INPUT_COMPNENTS_DIRNAME}/${component}/index.tsx`, // 진입점
     output: [

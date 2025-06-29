@@ -2,8 +2,8 @@ import { FC } from "react";
 import { usePopoverContext } from ".";
 import usePopoverPortal from "./hooks/usePopoverPortal";
 import { PopoverContentProps } from "./types/popoverContent";
-import { getMergedInjectedClassName } from "@repo/core/utils";
-import { popoverContentCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+import { popoverContentCls } from "@hw-rui/core/consts";
 
 const PopoverContent: FC<PopoverContentProps> = (props) => {
   const { className, children, ...controlledProps } = props;

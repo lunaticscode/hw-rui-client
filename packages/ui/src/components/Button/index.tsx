@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import { ButtonProps } from "./types";
 import buttonDefaultProps from "./consts/defaultProps";
-import { getMergedInjectedClassName } from "@repo/core/utils";
-import { buttonCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+import { buttonCls } from "@hw-rui/core/consts";
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { className, children, ...controlledProps } = props;

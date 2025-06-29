@@ -1,8 +1,8 @@
 import { FC, useMemo } from "react";
 import { SelectItemProps } from "./types/selectItem";
 import { useSelectContext } from ".";
-import { getMergedInjectedClassName } from "@repo/core/utils";
-import { selectItemCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+import { selectItemCls } from "@hw-rui/core/consts";
 
 const SelectItem: FC<SelectItemProps> = (props) => {
   const { selectedValue, handleChangeSelectedValue } = useSelectContext();

@@ -1,9 +1,12 @@
 import { cloneElement, forwardRef, JSX, useEffect, useRef } from "react";
 import { PopoverTriggerProps } from "./types/popoverTrigger";
-import { getMergedInjectedClassName } from "@repo/core/utils";
-import { popoverTriggerButtonCls, popoverTriggerCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+import {
+  popoverTriggerButtonCls,
+  popoverTriggerCls,
+} from "@hw-rui/core/consts";
 import { usePopoverContext } from ".";
-import { useMergedRef } from "@repo/core/hooks";
+import { useMergedRef } from "@hw-rui/core/hooks";
 
 const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
   (props, ref) => {

@@ -1,8 +1,8 @@
-import { getMergedInjectedClassName } from "@repo/core/utils";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import { useCalendarContext } from ".";
 import { CalendarCurrentProps } from "./types/calendarCurrent";
 import { getFormatedCurrentByMode } from "./utils/dateFormat";
-import { calendarCurrentCls } from "@repo/core/consts";
+import { calendarCurrentCls } from "@hw-rui/core/consts";
 import { useMemo } from "react";
 
 const CalendarCurrent: CalendarCurrentProps = (props) => {

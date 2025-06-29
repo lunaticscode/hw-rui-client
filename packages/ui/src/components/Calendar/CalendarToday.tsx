@@ -1,8 +1,8 @@
-import { getMergedInjectedClassName } from "@repo/core/utils";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import { useCalendarContext } from ".";
 import { CalendarTodayProps } from "./types/calendarToday";
 import { useMemo } from "react";
-import { calendarTodayButtonCls } from "@repo/core/consts";
+import { calendarTodayButtonCls } from "@hw-rui/core/consts";
 
 const CALENDAR_TODAY_DEFAULT_LABEL = "Today";
 const CalendarToday: CalendarTodayProps = (props) => {

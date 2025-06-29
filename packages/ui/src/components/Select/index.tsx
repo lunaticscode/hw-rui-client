@@ -14,11 +14,11 @@ import SelectTrigger from "./SelectTrigger";
 import SelectSelectedValue from "./SelectSelectedValue";
 import SelectContent from "./SelectContent";
 import SelectItem from "./SelectItem";
-import { getMergedInjectedClassName } from "@repo/core/utils";
-import { selectCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+import { selectCls } from "@hw-rui/core/consts";
 import Popover from "../Popover";
 import { PopoverRefProps } from "../Popover/types";
-import { useUIContext, useControlledValue } from "@repo/core/hooks";
+import { useUIContext, useControlledValue } from "@hw-rui/core/hooks";
 
 const SelectContext = createContext<SelectContextProps | null>(null);
 export const useSelectContext = () =>

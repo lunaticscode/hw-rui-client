@@ -9,7 +9,7 @@ import {
   toastCls,
   toastDescriptionCls,
   toastTitleCls,
-} from "@repo/core/consts";
+} from "@hw-rui/core/consts";
 
 export const Toaster: FC = () => {
   return <div id={"ui-toaster"}></div>;

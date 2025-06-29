@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { SelectSelectedValueProps } from "./types/selectValue";
-import { getMergedInjectedClassName } from "@repo/core/utils";
-import { selectSelectedValueCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+import { selectSelectedValueCls } from "@hw-rui/core/consts";
 import { useSelectContext } from ".";
 
 const SelectSelectedValue: FC<SelectSelectedValueProps> = (props) => {

@@ -5,9 +5,9 @@ import {
   CalendarMode,
   CalendarDate,
 } from "./types";
-import { useControlledValue, useUIContext } from "@repo/core/hooks";
-import { calendarCls } from "@repo/core/consts";
-import { getMergedInjectedClassName } from "@repo/core/utils";
+import { useControlledValue, useUIContext } from "@hw-rui/core/hooks";
+import { calendarCls } from "@hw-rui/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import CalendarCurrent from "./CalendarCurrent";
 import CalendarNavigator from "./CalendarNavigator";
 import CalendarToday from "./CalendarToday";

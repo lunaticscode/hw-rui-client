@@ -1,11 +1,12 @@
 import { FC, createContext, useMemo, useState } from "react";
 import { AccordionContextProps, AccordionProps } from "./types";
 import { accordionDefaultProps } from "./consts/defaultProps";
-import { getMergedInjectedClassName } from "@repo/core/utils";
-import { accordionCls } from "@repo/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+
 import AccordionTrigger from "./AccordionTrigger";
 import AccordionRegion from "./AccordionRegion";
-import { useUIContext } from "@repo/core/hooks";
+import { useUIContext } from "@hw-rui/core/hooks";
+import { accordionCls } from "@hw-rui/core/consts";
 
 type AccordionCompoundProps = {
   Trigger: typeof AccordionTrigger;

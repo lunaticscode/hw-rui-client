@@ -3,8 +3,8 @@ import { useCalendarContext } from ".";
 import { CALENDAR_MODES } from "./consts";
 import { CalendarMode } from "./types";
 import { CalendarModesProps } from "./types/calendarModes";
-import { calendarModesCls } from "@repo/core/consts";
-import { getMergedInjectedClassName } from "@repo/core/utils";
+import { calendarModesCls } from "@hw-rui/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 
 const CalendarModes: CalendarModesProps = (props) => {
   const { children, className: classNameProp } = props;
