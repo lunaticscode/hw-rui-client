@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react";
 
-export type CalendarNavigatorDirections = "prev" | "next";
+export type CalendarNavigatorDirections = -1 | 1;
 type CalendarNavigatorRequiredProps = {};
 type CalendarNavigatorOptionalProps = Partial<{
   className: string;

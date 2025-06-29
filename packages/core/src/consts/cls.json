@@ -16,7 +16,8 @@
     "todayButton": "calendar-today-button",
     "body": "calendar-body",
     "dateCell": "calendar-datecell",
-    "navigator": "calendar-navigator"
+    "navigator": "calendar-navigator",
+    "modes": "calendar-modes"
   },
   "popover": {
     "base": "popover",

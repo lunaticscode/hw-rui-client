@@ -1,1 +1,1 @@
-export const CalendarModes = ["month", "week"] as const;
+export const CALENDAR_MODES = ["month", "week"] as const;

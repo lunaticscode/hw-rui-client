@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from "react";
-import { CalendarModes } from "../consts";
+import { CALENDAR_MODES } from "../consts";
 
 export type CalendarDate = Date;
-export type CalendarMode = (typeof CalendarModes)[number];
+export type CalendarMode = (typeof CALENDAR_MODES)[number];
 
 type CalendarOptionalProps = Partial<{
   className?: string;

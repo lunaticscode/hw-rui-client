@@ -26,6 +26,7 @@ export const calendarTodayButtonCls = `${prefixCls}-${calendar.todayButton}`;
 export const calendarBodyCls = `${prefixCls}-${calendar.body}`;
 export const calendarDateCellCls = `${prefixCls}-${calendar.dateCell}`;
 export const calendarNavigatorCls = `${prefixCls}-${calendar.navigator}`;
+export const calendarModesCls = `${prefixCls}-${calendar.modes}`;
 
 /**== Popover ==**/
 export const popoverCls = `${prefixCls}-${popover.base}`;

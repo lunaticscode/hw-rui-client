@@ -3,6 +3,7 @@ import { useCalendarContext } from ".";
 import { CalendarNavigatorProps } from "./types/calendarNavigator";
 import { useMemo } from "react";
 import { calendarNavigatorCls } from "@repo/core/consts";
+import getDateFromNavigator from "./utils/getDateFromNavigator";
 
 const CalendarNavigator: CalendarNavigatorProps = (props) => {
   const { mode, selectedValue, handleChangeSelectedValue } =
@@ -13,8 +14,14 @@ const CalendarNavigator: CalendarNavigatorProps = (props) => {
     [classNameProp]
   );
 
-  const handleNavigatePrev = () => {};
-  const handleNavigateNext = () => {};
+  const handleNavigatePrev = () => {
+    const changedDate = getDateFromNavigator(selectedValue, -1, mode);
+    handleChangeSelectedValue(changedDate);
+  };
+  const handleNavigateNext = () => {
+    const changedDate = getDateFromNavigator(selectedValue, +1, mode);
+    handleChangeSelectedValue(changedDate);
+  };
 
   if (children && typeof children === "function") {
     return children(handleNavigatePrev, handleNavigatePrev);
