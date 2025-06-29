@@ -12,9 +12,11 @@ import CalendarCurrent from "./CalendarCurrent";
 import CalendarNavigator from "./CalendarNavigator";
 import CalendarToday from "./CalendarToday";
 import CalendarBody from "./CalendarBody";
+import CalendarModes from "./CalendarModes";
 
 type CalendarCompoundProps = {
   Current: typeof CalendarCurrent;
+  Modes: typeof CalendarModes;
   Navigator: typeof CalendarNavigator;
   Today: typeof CalendarToday;
   Body: typeof CalendarBody;
@@ -67,6 +69,7 @@ const Calendar: CalendarProps & CalendarCompoundProps = (props) => {
 };
 
 Calendar.Current = CalendarCurrent;
+Calendar.Modes = CalendarModes;
 Calendar.Navigator = CalendarNavigator;
 Calendar.Today = CalendarToday;
 Calendar.Body = CalendarBody;

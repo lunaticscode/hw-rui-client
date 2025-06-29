@@ -24,7 +24,7 @@ const CalendarNavigator: CalendarNavigatorProps = (props) => {
   };
 
   if (children && typeof children === "function") {
-    return children(handleNavigatePrev, handleNavigatePrev);
+    return children(handleNavigatePrev, handleNavigateNext);
   }
 
   return (

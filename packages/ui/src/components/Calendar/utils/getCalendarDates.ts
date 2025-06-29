@@ -1,17 +1,17 @@
 import { CalendarMode } from "../types";
 
-const getCalendarDates = (currentDate: Date, mode: CalendarMode) => {
+const getCalendarDates = (date: Date, mode: CalendarMode) => {
+  const [currentYear, currentMonth, currentDate] = [
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate(),
+  ];
   const mapModeToDates: {
     [key in CalendarMode]: key extends "month" | "year"
       ? () => Date[][]
       : () => Date[];
   } = {
     month: () => {
-      const [currentYear, currentMonth] = [
-        currentDate.getFullYear(),
-        currentDate.getMonth(),
-      ];
-
       const [firstDayOfMonth, lastDayOfMonth] = [
         new Date(currentYear, currentMonth, 1).getDay(),
         new Date(currentYear, currentMonth + 1, 0).getDay(),
@@ -40,7 +40,15 @@ const getCalendarDates = (currentDate: Date, mode: CalendarMode) => {
       return dates;
     },
     week: () => {
-      return [];
+      const currentDay = date.getDay();
+      const firstDateValueOfWeek = currentDate - currentDay;
+      const dates = Array.from(
+        { length: 7 },
+        (_, index) =>
+          new Date(currentYear, currentMonth, firstDateValueOfWeek + index)
+      );
+
+      return dates;
     },
   };
   return mapModeToDates[mode]();
