@@ -12,9 +12,7 @@ export type ToastPositions =
   | "top-right"
   | "top-left";
 export type ToastTypes = "default" | "success" | "danger";
-export type ToastStyleFromPosition = Partial<
-  Pick<CSSProperties, "top" | "left" | "right" | "bottom">
->;
+export type ToastStyleFromPosition = Partial<CSSProperties>;
 
 export type ToastArgs = {
   type?: ToastTypes;

@@ -11,7 +11,7 @@ import { cwd } from "node:process";
 
 const OUTPUT_DIRNAME = "dist";
 const INPUT_COMPNENTS_DIRNAME = "components";
-
+const EXCLUDES_COMPONENTS = ["Popover"];
 /**
  * @param {string} component
  */
@@ -48,7 +48,7 @@ const createPkgJsonPlugin = (component) => {
 
 /**
  * @param {string} component
- * @returns {import("rollup").RollupOptions}
+ * @returns {import("rollup").InputOption}
  */
 const getBaseRollupOption = (component) => {
   return {
@@ -63,13 +63,15 @@ const getBaseRollupOption = (component) => {
     input: `./src/${INPUT_COMPNENTS_DIRNAME}/${component}/index.tsx`, // 진입점
     output: [
       {
-        file: `${OUTPUT_DIRNAME}/${component}/index.js`,
-        format: "esm", // esmodule로 output
+        // `${OUTPUT_DIRNAME}/${component}/index.js`,
+        file: path.resolve(OUTPUT_DIRNAME, component, "index.js"),
+        format: "esm",
         sourcemap: false,
       },
       {
-        file: `${OUTPUT_DIRNAME}/${component}/index.cjs`,
-        format: "cjs", // esmodule로 output
+        // file: `${OUTPUT_DIRNAME}/${component}/index.cjs`,
+        file: path.resolve(OUTPUT_DIRNAME, component, "index.cjs"),
+        format: "cjs",
         sourcemap: false,
       },
     ],
@@ -86,6 +88,8 @@ const getBaseRollupOption = (component) => {
       typescript({
         tsconfig: "./tsconfig.json",
         allowImportingTsExtensions: false,
+        declaration: false,
+        emitDeclarationOnly: false,
       }),
       createPkgJsonPlugin(component),
     ],
@@ -96,9 +100,14 @@ const getBaseDtsRollupOption = (component) => {
   return {
     input: `./src/${INPUT_COMPNENTS_DIRNAME}/${component}/index.tsx`,
     output: [
-      { file: `./${OUTPUT_DIRNAME}/${component}/index.d.ts`, format: "esm" },
+      // { file: `./${OUTPUT_DIRNAME}/${component}/index.d.ts`, format: "esm" },
+      {
+        file: path.resolve(OUTPUT_DIRNAME, component, "index.d.ts"),
+        format: "esm",
+      },
     ],
-    plugins: [dts({ tsconfig: "./tsconfig.json" })],
+    // plugins: [dts({ tsconfig: "./tsconfig.json" })],
+    plugins: [dts()],
     external: [/\.css$/],
   };
 };
@@ -107,12 +116,15 @@ const getRollupOptions = () => {
   try {
     const targetDir = path.join(cwd(), "src", "components");
     const filenames = readdirSync(targetDir);
-    const targetComponents = filenames.filter((filename) =>
-      statSync(path.join(targetDir, filename)).isDirectory()
+    const targetComponents = filenames.filter(
+      (component) =>
+        statSync(path.join(targetDir, component)).isDirectory() &&
+        !EXCLUDES_COMPONENTS.includes(component)
     );
     if (!targetComponents || !targetComponents.length) {
       return process.exit(1);
     }
+
     const jsRollupOptions = targetComponents.map((component) =>
       getBaseRollupOption(component)
     );
