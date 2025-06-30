@@ -17,6 +17,7 @@ const Tabs: TabsProps & TabsCompoundProps = (props) => {
     children,
     value: valueProp,
     defaultValue: defaultValueProp = "",
+    onChange,
   } = props;
   const { value: selectedValue, setValue: setSelectedValue } =
     useControlledValue(valueProp, defaultValueProp);
@@ -28,6 +29,7 @@ const Tabs: TabsProps & TabsCompoundProps = (props) => {
 
   const handleChangeSelectedValue = (changedValue: TabsValue) => {
     setSelectedValue(changedValue);
+    onChange?.(changedValue);
   };
 
   const contextValue: TabsContextProps = useMemo(

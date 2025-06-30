@@ -7,16 +7,25 @@ import json from "@rollup/plugin-json";
 import { dts } from "rollup-plugin-dts";
 import path from "node:path";
 import { readdirSync, statSync, writeFileSync } from "node:fs";
-import { cwd } from "node:process";
+import { cwd, argv, exit } from "node:process";
 
 const OUTPUT_DIRNAME = "dist";
 const INPUT_COMPNENTS_DIRNAME = "components";
 const EXCLUDES_COMPONENTS = ["Popover"];
+
+const args = argv.slice(2);
+const buildTargetComponentArgs = args?.find((arg) =>
+  arg.startsWith("--component")
+);
+const onlyBuildComponent = buildTargetComponentArgs
+  ? buildTargetComponentArgs.split("--component=")[1]
+  : null;
+
 /**
  * @param {string} component
  */
-const getBasePkgJson = (component = "") => ({
-  version: "0.0.1",
+const getBasePkgJson = (component) => ({
+  version: "0.1.0",
   name: `@hw-rui/${component.toLowerCase()}`,
   main: "./index.cjs",
   module: "./index.js",
@@ -30,7 +39,10 @@ const getBasePkgJson = (component = "") => ({
  * @param {string} component
  * @returns {import("rollup").Plugin}
  */
-const createPkgJsonPlugin = (component) => {
+const createPkgJsonPlugin = (component = "") => {
+  if (!component.trim()) {
+    return exit(1);
+  }
   return {
     name: "@hw-rui/create-package-json",
     closeBundle: () => {
@@ -51,6 +63,9 @@ const createPkgJsonPlugin = (component) => {
  * @returns {import("rollup").InputOptions}
  */
 const getBaseRollupOption = (component) => {
+  if (!component.trim()) {
+    return exit(1);
+  }
   return {
     external: [
       "react",
@@ -60,16 +75,14 @@ const getBaseRollupOption = (component) => {
       "@hw-rui/core/utils",
       "@hw-rui/core/hooks",
     ],
-    input: `./src/${INPUT_COMPNENTS_DIRNAME}/${component}/index.tsx`, // 진입점
+    input: `./src/${INPUT_COMPNENTS_DIRNAME}/${component}/index.tsx`,
     output: [
       {
-        // `${OUTPUT_DIRNAME}/${component}/index.js`,
         file: path.resolve(OUTPUT_DIRNAME, component, "index.js"),
         format: "esm",
         sourcemap: false,
       },
       {
-        // file: `${OUTPUT_DIRNAME}/${component}/index.cjs`,
         file: path.resolve(OUTPUT_DIRNAME, component, "index.cjs"),
         format: "cjs",
         sourcemap: false,
@@ -100,13 +113,11 @@ const getBaseDtsRollupOption = (component) => {
   return {
     input: `./src/${INPUT_COMPNENTS_DIRNAME}/${component}/index.tsx`,
     output: [
-      // { file: `./${OUTPUT_DIRNAME}/${component}/index.d.ts`, format: "esm" },
       {
         file: path.resolve(OUTPUT_DIRNAME, component, "index.d.ts"),
         format: "esm",
       },
     ],
-    // plugins: [dts({ tsconfig: "./tsconfig.json" })],
     plugins: [dts()],
     external: [/\.css$/],
   };
@@ -116,13 +127,15 @@ const getRollupOptions = () => {
   try {
     const targetDir = path.join(cwd(), "src", "components");
     const filenames = readdirSync(targetDir);
-    const targetComponents = filenames.filter(
-      (component) =>
-        statSync(path.join(targetDir, component)).isDirectory() &&
-        !EXCLUDES_COMPONENTS.includes(component)
-    );
+    const targetComponents = onlyBuildComponent
+      ? [onlyBuildComponent]
+      : filenames.filter(
+          (component) =>
+            statSync(path.join(targetDir, component)).isDirectory() &&
+            !EXCLUDES_COMPONENTS.includes(component)
+        );
     if (!targetComponents || !targetComponents.length) {
-      return process.exit(1);
+      return exit(1);
     }
 
     const jsRollupOptions = targetComponents.map((component) =>
@@ -134,7 +147,7 @@ const getRollupOptions = () => {
     return [...jsRollupOptions, ...dtsRollupOptions];
   } catch (err) {
     console.error(err);
-    process.exit(1);
+    exit(1);
   }
 };
 
