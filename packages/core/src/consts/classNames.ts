@@ -43,6 +43,7 @@ export const selectItemCls = `${prefixCls}-${select.item}`;
 
 /**== Tabs ==**/
 export const tabsCls = `${prefixCls}-${tabs.base}`;
+export const tabsItemCls = `${prefixCls}-${tabs.item}`;
 
 /**== Toast ==**/
 export const toastCls = `${prefixCls}-${toast.base}`;

@@ -33,7 +33,8 @@
     "item": "select-item"
   },
   "tabs": {
-    "base": "tabs"
+    "base": "tabs",
+    "item": "tabs-item"
   },
   "toast": {
     "base": "toast",
