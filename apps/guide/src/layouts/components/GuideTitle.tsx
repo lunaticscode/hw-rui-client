@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useMemo } from "react";
+import { FC, PropsWithChildren, useId, useMemo } from "react";
 
 type GuideTitleTags = "h2" | "h3";
 interface GuideTitleProps extends PropsWithChildren {
@@ -16,6 +16,21 @@ const getTitleCls = (type: GuideTitleTags) => {
 const GuideTitle: FC<GuideTitleProps> = (props) => {
   const { type = "h2", children } = props;
   const [Tag, titleCls] = useMemo(() => [type, getTitleCls(type)], [type]);
-  return <Tag className={titleCls}>{children}</Tag>;
+  const guideRandomId = useId();
+  const sectionId =
+    typeof children === "string" ? children.toLocaleLowerCase() : guideRandomId;
+  return type === "h2" ? (
+    <section id={sectionId}>
+      <Tag
+        style={{ cursor: "pointer" }}
+        onClick={() => (window.location.href = `#${sectionId}`)}
+        className={titleCls}
+      >
+        {children}
+      </Tag>
+    </section>
+  ) : (
+    <Tag className={titleCls}>{children}</Tag>
+  );
 };
 export default GuideTitle;

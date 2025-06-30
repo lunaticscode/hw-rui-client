@@ -4,10 +4,13 @@ import { CalendarDateCellProps } from "../types/calendarDateCell";
 import { getFormatedDateCellByMode } from "../utils/dateFormat";
 import { calendarDateCellCls } from "@hw-rui/core/consts";
 import { useMemo } from "react";
+import { isEqualByMode } from "../utils/isEqual";
 
 const CalendarDateCell: CalendarDateCellProps = (props) => {
-  const { mode, handleChangeSelectedValue } = useCalendarContext();
+  const { mode, handleChangeSelectedValue, selectedValue } =
+    useCalendarContext();
   const { date, className } = props;
+
   const cls = useMemo(
     () => getMergedInjectedClassName(calendarDateCellCls, className),
     [className]
@@ -17,8 +20,13 @@ const CalendarDateCell: CalendarDateCellProps = (props) => {
     handleChangeSelectedValue(date);
   };
 
+  const isActive = useMemo(
+    () => isEqualByMode(date, selectedValue, mode),
+    [date, selectedValue, mode]
+  );
+
   return (
-    <div onClick={handleClickDateCell} className={cls}>
+    <div data-active={isActive} onClick={handleClickDateCell} className={cls}>
       {getFormatedDateCellByMode(date, mode)}
     </div>
   );

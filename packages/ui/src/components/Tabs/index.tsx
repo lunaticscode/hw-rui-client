@@ -3,11 +3,15 @@ import { TabsContextProps, TabsProps, TabsValue } from "./types";
 import { tabsCls } from "@hw-rui/core/consts";
 import { createContext, useMemo } from "react";
 import { useControlledValue, useUIContext } from "@hw-rui/core/hooks";
+import TabsItem from "./TabsItem";
 
+interface TabsCompoundProps {
+  Item: typeof TabsItem;
+}
 const TabsContext = createContext<TabsContextProps | null>(null);
 export const useTabsContext = () => useUIContext(TabsContext);
 
-const Tabs: TabsProps = (props) => {
+const Tabs: TabsProps & TabsCompoundProps = (props) => {
   const {
     className: classNameProp,
     children,
@@ -40,4 +44,5 @@ const Tabs: TabsProps = (props) => {
     </TabsContext.Provider>
   );
 };
+Tabs.Item = TabsItem;
 export default Tabs;

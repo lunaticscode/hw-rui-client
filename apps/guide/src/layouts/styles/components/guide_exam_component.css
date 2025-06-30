@@ -1,0 +1,8 @@
+.app-guide-exam-component {
+  background-color: #1a1d24;
+  width: calc(100% - 40px);
+  height: auto;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 15px 0px;
+}

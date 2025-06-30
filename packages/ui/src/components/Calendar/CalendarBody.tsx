@@ -34,13 +34,17 @@ const CalendarBody: CalendarBodyProps = (props) => {
       ));
     }
     if (mode === "week") {
-      return (dates as CalendarDate[]).map((date, dateIndex) => (
-        <CalendarDateCell
-          key={`date-key-${dateIndex}`}
-          date={date}
-          className={cls}
-        />
-      ));
+      return (
+        <div className={`${cls}-week`}>
+          {(dates as CalendarDate[]).map((date, dateIndex) => (
+            <CalendarDateCell
+              key={`date-key-${dateIndex}`}
+              date={date}
+              className={cls}
+            />
+          ))}
+        </div>
+      );
     }
   };
 

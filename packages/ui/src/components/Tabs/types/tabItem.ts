@@ -5,11 +5,11 @@ type TabsItemRequiredProps = {
   value: TabsValue;
 };
 
-type TabsItemOptionalProps = Partial<
-  PropsWithChildren & {
-    className: string;
-    children: (value: TabsValue, handleClickTabsItem: () => void) => ReactNode;
-  }
->;
+type TabsItemOptionalProps = Partial<{
+  className: string;
+  children:
+    | ReactNode
+    | ((value: TabsValue, handleClickTabsItem: () => void) => ReactNode);
+}>;
 
 export type TabsItemProps = FC<TabsItemOptionalProps & TabsItemRequiredProps>;

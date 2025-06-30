@@ -5,15 +5,15 @@ import { tabsItemCls } from "@hw-rui/core/consts";
 import { useTabsContext } from ".";
 
 const TabsItem: TabsItemProps = (props) => {
-  const { handleChangeSelectedValue } = useTabsContext();
-  const { value, children, className: classNameProp } = props;
+  const { handleChangeSelectedValue, selectedValue } = useTabsContext();
+  const { value: valueProp, children, className: classNameProp } = props;
 
   const handleClickTabsItem = () => {
-    handleChangeSelectedValue(value);
+    handleChangeSelectedValue(valueProp);
   };
 
   if (children && typeof children === "function") {
-    return children(value, handleClickTabsItem);
+    return children(valueProp, handleClickTabsItem);
   }
 
   const cls = useMemo(
@@ -21,7 +21,15 @@ const TabsItem: TabsItemProps = (props) => {
     [classNameProp]
   );
 
-  return <div className={cls}>{children}</div>;
+  return (
+    <div
+      data-active={valueProp === selectedValue}
+      className={cls}
+      onClick={handleClickTabsItem}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default TabsItem;

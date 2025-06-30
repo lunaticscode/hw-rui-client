@@ -13,8 +13,9 @@ const CodeBlock: FC<CodeBlockProps> = ({ code }) => {
     const filteredCode = code.replace(/```[a-zA-Z]+\n|```/g, "");
     window.navigator.clipboard.writeText(filteredCode.trim());
   };
+  if (!code?.trim()) return null;
   return (
-    <>
+    <div className={"app-guide-codeblock"}>
       <div className={"app-guide-codeblock-copy-button"}>
         <button onClick={handleClickCopy}>copy</button>
       </div>
@@ -37,7 +38,7 @@ const CodeBlock: FC<CodeBlockProps> = ({ code }) => {
       >
         {code}
       </ReactMarkdown>
-    </>
+    </div>
   );
 };
 

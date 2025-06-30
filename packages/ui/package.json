@@ -9,7 +9,8 @@
     "./Popover": "./src/components/Popover/index.tsx",
     "./Select": "./src/components/Select/index.tsx",
     "./Toast": "./src/components/Toast/index.tsx",
-    "./Calendar": "./src/components/Calendar/index.tsx"
+    "./Calendar": "./src/components/Calendar/index.tsx",
+    "./Tabs": "./src/components/Tabs/index.tsx"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
