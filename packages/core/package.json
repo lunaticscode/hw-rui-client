@@ -12,7 +12,21 @@
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.13.9",
     "@types/react": "19.0.10",
-    "@types/react-dom": "19.0.4"
+    "@types/react-dom": "19.0.4",
+    "@babel/core": "^7.27.7",
+    "@babel/preset-env": "^7.26.9",
+    "@babel/preset-react": "^7.26.3",
+    "@babel/preset-typescript": "^7.26.0",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^28.0.3",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "@rollup/plugin-typescript": "^12.1.2",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-peer-deps-external": "^2.2.4"
+  },
+  "scripts": {
+    "build": "rollup -c --logLevel silent && node createEntryPkgJson.mjs"
   },
   "dependencies": {
     "react": "^19.0.0",
