@@ -61,7 +61,10 @@ const Calendar: CalendarProps & CalendarCompoundProps = (props) => {
 
   return (
     <CalendarContext.Provider value={contextValue}>
-      <div className={getMergedInjectedClassName(calendarCls, classNameProp)}>
+      <div
+        data-mode={mode}
+        className={getMergedInjectedClassName(calendarCls, classNameProp)}
+      >
         {children}
       </div>
     </CalendarContext.Provider>

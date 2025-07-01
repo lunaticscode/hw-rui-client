@@ -9,7 +9,7 @@ import path from "node:path";
 import { writeFileSync } from "node:fs";
 
 const getBasePkgJson = (dir) => ({
-  version: "0.0.1",
+  version: "0.1.4",
   name: `@hw-rui/core/${dir}`,
   main: "./index.cjs",
   module: "./index.js",

@@ -48,6 +48,10 @@ const CalendarBody: CalendarBodyProps = (props) => {
     }
   };
 
-  return <div className={cls}>{renderDateCell()}</div>;
+  return (
+    <div data-mode={mode} className={cls}>
+      {renderDateCell()}
+    </div>
+  );
 };
 export default CalendarBody;
