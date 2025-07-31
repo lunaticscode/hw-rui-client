@@ -4,6 +4,8 @@ export { default as Accordion } from "./Accordion";
 export * from "./Accordion";
 export { default as Calendar } from "./Calendar";
 export * from "./Calendar";
+export { default as Carousel } from "./Carousel";
+export * from "./Carousel";
 export { default as Popover } from "./Popover";
 export * from "./Popover";
 export { default as Select } from "./Select";

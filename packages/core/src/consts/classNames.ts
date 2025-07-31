@@ -3,6 +3,7 @@ import {
   accordion,
   button,
   calendar,
+  carousel,
   popover,
   select,
   tabs,
@@ -27,6 +28,13 @@ export const calendarBodyCls = `${prefixCls}-${calendar.body}`;
 export const calendarDateCellCls = `${prefixCls}-${calendar.dateCell}`;
 export const calendarNavigatorCls = `${prefixCls}-${calendar.navigator}`;
 export const calendarModesCls = `${prefixCls}-${calendar.modes}`;
+
+/**== Carousel ==**/
+export const carouselCls = `${prefixCls}-${carousel.base}`;
+export const carouselHolderCls = `${prefixCls}-${carousel.holder}`;
+export const carouselItemCls = `${prefixCls}-${carousel.item}`;
+export const carouselNavigatorCls = `${prefixCls}-${carousel.navigator}`;
+export const carouselIndicatorCls = `${prefixCls}-${carousel.indicator}`;
 
 /**== Popover ==**/
 export const popoverCls = `${prefixCls}-${popover.base}`;

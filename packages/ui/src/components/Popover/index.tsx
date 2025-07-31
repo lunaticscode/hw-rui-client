@@ -7,13 +7,16 @@ import {
   useImperativeHandle,
   useState,
 } from "react";
-import { PopoverProps, PopoverContextProps, PopoverRefProps } from "./types";
+import { PopoverProps, PopoverContextProps } from "./types";
 import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import { popoverCls } from "@hw-rui/core/consts";
 import { popoverDefaultProps } from "./consts/defaultProps";
 import PopoverContent from "./PopoverContent";
 import PopoverTrigger from "./PopoverTrigger";
 import { useUIContext } from "@hw-rui/core/hooks";
+export type PopoverRefProps = {
+  close: () => void;
+};
 
 const PopoverContext = createContext<PopoverContextProps | null>(null);
 

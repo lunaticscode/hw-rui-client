@@ -7,7 +7,6 @@ const App = () => {
       <Accordion.Region id="section1">
         <p>This is the content of Section 1.</p>
       </Accordion.Region>
-
       <Accordion.Trigger id="section2">Section 2</Accordion.Trigger>
       <Accordion.Region id="section2">
         <p>This is the content of Section 2.</p>

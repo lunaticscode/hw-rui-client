@@ -19,6 +19,13 @@
     "navigator": "calendar-navigator",
     "modes": "calendar-modes"
   },
+  "carousel": {
+    "base": "carousel",
+    "holder": "carousel-holder",
+    "item": "carousel-item",
+    "navigator": "carousel-navigator",
+    "indicator": "carousel-indicator"
+  },
   "popover": {
     "base": "popover",
     "trigger": "popover-trigger",

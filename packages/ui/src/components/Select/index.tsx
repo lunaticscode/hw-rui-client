@@ -16,8 +16,7 @@ import SelectContent from "./SelectContent";
 import SelectItem from "./SelectItem";
 import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import { selectCls } from "@hw-rui/core/consts";
-import Popover from "../Popover";
-import { PopoverRefProps } from "../Popover/types";
+import Popover, { PopoverRefProps } from "../Popover";
 import { useUIContext, useControlledValue } from "@hw-rui/core/hooks";
 
 const SelectContext = createContext<SelectContextProps | null>(null);

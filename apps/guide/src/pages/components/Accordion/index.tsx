@@ -11,6 +11,8 @@ import GuideTitle from "@layouts/components/GuideTitle";
 import useTranslator from "@layouts/hooks/useTranslator";
 import { useEffect, useState } from "react";
 import { setProcessedMarkdownString } from "@utils/markdown";
+import ExamComponent from "@layouts/components/ExamComponent";
+import Accordion from "@repo/ui/Accordion";
 
 const Guide = () => {
   const { Trans } = useTranslator();
@@ -44,6 +46,18 @@ const Guide = () => {
       </Install>
       <Usage>
         <GuideTitle type="h3">Basic</GuideTitle>
+        <ExamComponent>
+          <Accordion>
+            <Accordion.Trigger id="section1">Section 1</Accordion.Trigger>
+            <Accordion.Region id="section1">
+              <p>This is the content of Section 1.</p>
+            </Accordion.Region>
+            <Accordion.Trigger id="section2">Section 2</Accordion.Trigger>
+            <Accordion.Region id="section2">
+              <p>This is the content of Section 2.</p>
+            </Accordion.Region>
+          </Accordion>
+        </ExamComponent>
         <CodeBlock code={basicExampleCode} />
       </Usage>
       <Props />

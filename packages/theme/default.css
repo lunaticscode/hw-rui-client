@@ -6,10 +6,22 @@
   padding: 8px 16px;
   font-size: 14px;
   font-weight: 500;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
+  border: none;
   border-radius: 4px;
-  background-color: #f0f0f0;
+  color: #eeeeee;
+  background-color: #092f55;
   cursor: pointer;
+}
+
+.hw-rui-button[data-variant="ghost"] {
+  background-color: #76787a;
+}
+.hw-rui-button[data-variant="positive"] {
+  background-color: #3383d3;
+}
+.hw-rui-button[data-variant="negative"] {
+  background-color: #d62a3e;
 }
 
 .hw-rui-button-icon {
@@ -79,6 +91,7 @@
 
 .hw-rui-popover-content {
   margin-top: 8px;
+  width: 100%;
   padding: 12px;
   background-color: #fff;
   border: 1px solid #ddd;
@@ -123,6 +136,7 @@
   position: absolute;
   top: 100%;
   left: 0;
+  width: fit-content;
   margin-top: 4px;
   background-color: #fff;
   border: 1px solid #aaa;
@@ -320,6 +334,61 @@
 .hw-rui-calendar-modes button.active,
 .hw-rui-calendar-modes button:hover {
   background-color: #d1d5db;
+}
+
+/* === Carousel Styles === */
+.hw-rui-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.hw-rui-carousel-holder {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+  will-change: transform;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+}
+
+.hw-rui-carousel-item {
+  /* flex: 0 0 auto; */
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.hw-rui-carousel-navigator {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  gap: 0.5rem;
+}
+
+.hw-rui-carousel-navigator button {
+  border: none;
+  padding: 3px 5px;
+  background-color: #ccc;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.hw-rui-carousel-navigator button:hover {
+  background-color: #999;
 }
 
 /* === Tabs Styles === */

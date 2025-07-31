@@ -28,7 +28,9 @@ export type PopoverProps = PropsWithChildren &
 
 export type PopoverContextProps = {
   open: boolean;
-  triggerRef: RefObject<HTMLElement | null>;
+  triggerRef: RefObject<
+    HTMLElement | HTMLButtonElement | HTMLDivElement | null
+  >;
   contentSlotRef: RefObject<HTMLElement | null>;
   position: PopoverContentPositions;
   setTriggerRef: Dispatch<SetStateAction<RefObject<HTMLElement | null>>>;
@@ -36,8 +38,4 @@ export type PopoverContextProps = {
   handleContentOpen: () => void;
   handleContentClose: () => void;
   handleClickTrigger: () => void;
-};
-
-export type PopoverRefProps = {
-  close: () => void;
 };
