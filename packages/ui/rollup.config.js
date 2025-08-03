@@ -11,7 +11,8 @@ import { cwd, argv, exit } from "node:process";
 
 const OUTPUT_DIRNAME = "dist";
 const INPUT_COMPNENTS_DIRNAME = "components";
-const EXCLUDES_COMPONENTS = ["Popover"];
+// const EXCLUDES_COMPONENTS = ["Popover"];
+const EXCLUDES_COMPONENTS = [];
 
 const args = argv.slice(2);
 const buildTargetComponentArgs = args?.find((arg) =>
@@ -25,13 +26,13 @@ const onlyBuildComponent = buildTargetComponentArgs
  * @param {string} component
  */
 const getBasePkgJson = (component) => ({
-  version: "0.1.0",
+  version: "0.1.5",
   name: `@hw-rui/${component.toLowerCase()}`,
   main: "./index.cjs",
   module: "./index.js",
   types: "./index.d.ts",
   dependencies: {
-    "@hw-rui/core": "^0.1.0",
+    "@hw-rui/core": "^0.1.5",
   },
 });
 

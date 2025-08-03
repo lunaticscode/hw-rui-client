@@ -2,7 +2,7 @@ import { join } from "node:path";
 import { writeFileSync } from "node:fs";
 const pkgJsonTemplate = {
   name: "@hw-rui/core",
-  version: "0.1.3",
+  version: "0.1.5",
   license: "MIT",
   exports: {
     "./consts": {

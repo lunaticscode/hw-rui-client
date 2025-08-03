@@ -79,7 +79,6 @@ const usePopoverPortal = (
           handleContentClose();
         }
       }, [isOutside]);
-
       return createPortal(
         <div
           {...controlledProps}
@@ -89,6 +88,7 @@ const usePopoverPortal = (
             position: "absolute",
             top: `${position.y}px`,
             left: `${position.x}px`,
+            width: "max-content",
           }}
         >
           {children}

@@ -4,7 +4,9 @@ import {
   ForwardRefExoticComponent,
   RefAttributes,
   RefObject,
+  useEffect,
   useImperativeHandle,
+  useRef,
   useState,
 } from "react";
 import { PopoverProps, PopoverContextProps } from "./types";
@@ -40,7 +42,7 @@ const PopoverForwardRef = forwardRef<PopoverRefProps, PopoverProps>(
       ...popoverDefaultProps,
       ...controlledProps,
     };
-
+    const popoverContentSlotRef = useRef<HTMLDivElement>(null);
     const [contentSlotRef, setContentSlotRef] = useState<
       RefObject<HTMLElement | null>
     >({ current: null });
@@ -50,6 +52,12 @@ const PopoverForwardRef = forwardRef<PopoverRefProps, PopoverProps>(
         current: null,
       }
     );
+
+    useEffect(() => {
+      if (popoverContentSlotRef.current) {
+        setContentSlotRef(popoverContentSlotRef);
+      }
+    }, [popoverContentSlotRef]);
 
     const closeByTrigger = () => {
       setOpen(false);
@@ -85,7 +93,10 @@ const PopoverForwardRef = forwardRef<PopoverRefProps, PopoverProps>(
 
     return (
       <PopoverContext.Provider value={popoverContextValue}>
-        <div className={getMergedInjectedClassName(popoverCls, className)}>
+        <div
+          ref={popoverContentSlotRef}
+          className={getMergedInjectedClassName(popoverCls, className)}
+        >
           {children}
         </div>
       </PopoverContext.Provider>
@@ -98,7 +109,5 @@ const Popover = {
   Trigger: PopoverTrigger,
   Content: PopoverContent,
 } as PopoverCompoundProps;
-// Popover.Trigger = PopoverTrigger;
-// Popover.Content = PopoverContent;
 export default Popover;
 Popover.displayName = "Popover";

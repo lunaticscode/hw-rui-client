@@ -1,4 +1,4 @@
-import { cloneElement, forwardRef, JSX, useEffect, useRef } from "react";
+import { cloneElement, forwardRef, JSX, Ref, useEffect, useRef } from "react";
 import { PopoverTriggerProps } from "./types/popoverTrigger";
 import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import {
@@ -11,10 +11,8 @@ import { useMergedRef } from "@hw-rui/core/hooks";
 const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
   (props, ref) => {
     const { className, children } = props;
-    const popoverContentSlotRef = useRef<HTMLDivElement>(null);
 
-    const { setTriggerRef, setContentSlotRef, handleClickTrigger } =
-      usePopoverContext();
+    const { setTriggerRef, handleClickTrigger } = usePopoverContext();
     const internalTriggreRef = useRef(null);
     const triggerRef = useMergedRef(ref, internalTriggreRef);
 
@@ -31,18 +29,13 @@ const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
       });
     }
 
-    useEffect(() => {
-      if (popoverContentSlotRef.current) {
-        setContentSlotRef(popoverContentSlotRef);
-      }
-    }, [popoverContentSlotRef]);
     return (
       <>
         <span
           className={getMergedInjectedClassName(popoverTriggerCls, className)}
         >
           <button
-            ref={triggerRef}
+            ref={triggerRef as Ref<any>}
             onClick={handleClickTrigger}
             className={getMergedInjectedClassName(
               popoverTriggerButtonCls,
@@ -52,7 +45,6 @@ const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>(
             {children ?? "Popover Open"}
           </button>
         </span>
-        <div ref={popoverContentSlotRef} />
       </>
     );
   }
