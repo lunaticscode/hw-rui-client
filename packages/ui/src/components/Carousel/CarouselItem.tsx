@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { CarouselItemProps } from "./types/carouselItem.type";
 import { getMergedInjectedClassName } from "@hw-rui/core/utils";
 import { carouselItemCls } from "@hw-rui/core/consts";
@@ -13,7 +13,7 @@ const getIsVisible = (currentIndex: number | number[], index: number) => {
 };
 
 const CarouselItem: CarouselItemProps = (props) => {
-  const { children, className: classNameProp, value, index } = props;
+  const { children, className: classNameProp, index } = props;
   const { currentIndex } = useCarouselContext();
   const cls = useMemo(
     () => getMergedInjectedClassName(carouselItemCls, classNameProp),

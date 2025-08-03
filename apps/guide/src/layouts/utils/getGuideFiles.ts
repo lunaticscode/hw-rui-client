@@ -5,15 +5,23 @@ type CustomElementType = () => JSX.Element;
 type CustomRouteModule = {
   default: CustomElementType;
 };
+
 export type CustomRoutes = {
   path: string;
   Element: CustomElementType;
+  importer: () => Promise<unknown>;
 };
 
 const PARENT_DIR_NAME = "pages";
 type GuideTypes = "foundations" | "components";
 const GUIDE_FOUNDATIONS_DIR = `/${PARENT_DIR_NAME}/foundations/`;
 const GUIDE_COMPONENTS_DIR = `/${PARENT_DIR_NAME}/components/`;
+export const foundationPageMap = import.meta.glob(
+  "../../pages/foundations/**/index.tsx"
+);
+export const componentPageMap = import.meta.glob(
+  "../../pages/components/**/index.tsx"
+);
 
 const mapGuideTypeToDir: { [key in GuideTypes]: string } = {
   foundations: GUIDE_FOUNDATIONS_DIR,
@@ -70,6 +78,14 @@ class GuideFiles {
         tempRoutes.push({
           path: `/${guideType}/${componentName.toLowerCase()}`,
           Element: (guideAllFiles[filePath] as CustomRouteModule).default,
+          importer:
+            guideType === "components"
+              ? componentPageMap[
+                  `../../pages/components/${componentName}/index.tsx`
+                ]
+              : foundationPageMap[
+                  `../../pages/foundations/${componentName}/index.tsx`
+                ],
         });
         sidebarMenus.push({
           label: componentName,

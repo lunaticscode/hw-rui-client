@@ -21,6 +21,11 @@ export type ToastArgs = {
   description?: ReactNode;
   closeElem?: ReactNode;
   duration?: number;
+  classNames?: Partial<{
+    title: string;
+    description: string;
+    close: string;
+  }>;
 };
 
 export type ToastChildBaseProps = PropsWithChildren &

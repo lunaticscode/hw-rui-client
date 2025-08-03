@@ -1,4 +1,4 @@
-.app-sidebar {
+/* .app-sidebar {
   width: var(--sidebar-width);
   height: calc(100vh - 2rem);
   padding: 1rem;
@@ -71,4 +71,120 @@
 }
 .app-sidebar-menu[data-active="true"]:hover {
   color: #333;
+} */
+
+/** version 1 **/
+
+/* ===== Sidebar container ===== */
+.app-sidebar {
+  width: var(--sidebar-width, 260px);
+  height: 100vh;
+  padding: 1rem;
+  background-color: var(--rs-gray-0);
+  border-right: 1px solid var(--rs-border-color);
+  position: fixed;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+}
+
+/* Logo */
+.app-sidebar-logo-wrapper > img {
+  width: 80%;
+  margin-left: 10%;
+  display: block;
+}
+
+.app-sidebar-logo-wrapper > h3 {
+  text-align: center;
+  font-weight: 800;
+  font-size: 24px;
+  color: var(--app-main-color);
+}
+
+/* ===== Language / small actions (RSuite IconButton 'subtle' 느낌) ===== */
+.app-sidebar-translate-buttons-wrapper {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.app-sidebar-translate-buttons-wrapper > button {
+  width: 36px;
+  height: 32px;
+  margin: 0 4px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 32px;
+  background: transparent;
+  color: var(--rs-text-subtle);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.app-sidebar-translate-buttons-wrapper > button:hover {
+  background-color: var(--rs-gray-50);
+}
+.app-sidebar-translate-buttons-wrapper > button[data-active="true"] {
+  background-color: var(--rs-primary-50);
+  color: var(--rs-primary-700);
+}
+
+/* ===== Group heading (RSuite 문서 좌측 내비 섹션 타이틀 톤) ===== */
+.app-sidebar-group-menu {
+  padding: 0.25rem;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--rs-text-subtle);
+  text-decoration: none;
+  border-bottom: 1px solid #eeeeee;
+}
+.app-sidebar-group-menu:first-of-type {
+  margin-top: 12px;
+}
+
+/* ===== Menu item (RSuite Nav/Sidenav 기본 appearance) ===== */
+.app-sidebar-menu {
+  display: block;
+  padding: 8px 12px;
+  margin: 4px 0;
+  font-size: 14px;
+  color: var(--rs-text);
+  text-decoration: none;
+  border-radius: 6px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.app-sidebar-menu:hover {
+  background-color: var(--rs-gray-50);
+  color: var(--rs-text);
+}
+
+/* Active: 프라이머리 포커스 + 인셋 보더로 강조 */
+.app-sidebar-menu[data-active="true"] {
+  background-color: var(--rs-primary-50);
+  color: var(--rs-primary-700);
+  font-weight: 600;
+  /* box-shadow: inset 2px 3px 2px var(--rs-primary-700); */
+}
+.app-sidebar-menu[data-active="true"]:hover {
+  background-color: var(--rs-primary-50);
+  color: var(--rs-primary-700);
+}
+
+/* 접근성: 키보드 포커스 */
+.app-sidebar a:focus-visible,
+.app-sidebar button:focus-visible {
+  outline: 2px solid var(--rs-primary-600);
+  outline-offset: 2px;
+  border-radius: 6px;
 }

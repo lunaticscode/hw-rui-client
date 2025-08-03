@@ -25,7 +25,8 @@ const Sidebar: FC<SidebarProps> = (props) => {
   return (
     <aside className={sidebarCls}>
       <div className={sidebarLogoWrapperCls}>
-        <img src={"/hwrui-logo.webp"} />
+        {/* <img src={"/hwrui-logo.webp"} /> */}
+        <h3>HW-RUI</h3>
       </div>
       <div className={sidebarTranslateButtonsWrapperCls}>
         <button

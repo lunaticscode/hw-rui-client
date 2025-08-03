@@ -48,7 +48,7 @@ export const useCarouselContext = () =>
 const Carousel: CarouselProps & CarouselCompoundProps = (props) => {
   const {
     children,
-    transitionMode,
+    // transitionMode,
     itemsPerView = 1,
     className: classNameProp,
     defaultIndex = itemsPerView > 1

@@ -10,9 +10,12 @@ import {
   toastDescriptionCls,
   toastTitleCls,
 } from "@hw-rui/core/consts";
+import { getMergedInjectedClassName } from "@hw-rui/core/utils";
+
+const TOASTER_ID = "hw-rui-toaster";
 
 export const Toaster: FC = () => {
-  return <div id={"ui-toaster"}></div>;
+  return <div id={TOASTER_ID}></div>;
 };
 Toaster.displayName = "Toaster";
 
@@ -60,16 +63,30 @@ const useToast = () => {
       closeElem,
       duration = 2000,
       type = "default",
+      classNames = { title: "", description: "", close: "" },
     } = args;
     cleanup();
     toasterRoot.current =
-      createRoot(document.getElementById("ui-toaster")!) || null;
+      createRoot(document.getElementById(TOASTER_ID)!) || null;
     if (!toasterRoot.current) {
       console.error(
-        `Cannot make Root from id="ui-toaster". Check <Toaster /> is mounted.`
+        `Cannot make Root from id="${TOASTER_ID}". Check <Toaster /> is mounted.`
       );
       return;
     }
+
+    const titleCls = getMergedInjectedClassName(
+      toastTitleCls,
+      classNames.title
+    );
+    const descriptionCls = getMergedInjectedClassName(
+      toastDescriptionCls,
+      classNames.description
+    );
+    const closeCls = getMergedInjectedClassName(
+      toastCloseCls,
+      classNames.close
+    );
 
     toasterRoot.current.render(
       <div
@@ -77,13 +94,14 @@ const useToast = () => {
         data-type={type}
         style={{ ...getStyleByPosition(position), position: "fixed" }}
       >
-        <ToastTitle className={toastTitleCls}>{title}</ToastTitle>
-        <ToastDescription className={toastDescriptionCls}>
+        <ToastTitle className={titleCls}>{title}</ToastTitle>
+        <ToastDescription className={descriptionCls}>
           {description}
         </ToastDescription>
-        <ToastClose className={toastCloseCls}>{closeElem}</ToastClose>
+        <ToastClose className={closeCls}>{closeElem}</ToastClose>
       </div>
     );
+
     timerId.current = setTimeout(() => {
       cleanup();
     }, duration);

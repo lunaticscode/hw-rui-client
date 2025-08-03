@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build:ssr-entry": "vite build --ssr src/Router.tsx --outDir dist-ssr",
+    "build": "pnpm run build:ssr-entry && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

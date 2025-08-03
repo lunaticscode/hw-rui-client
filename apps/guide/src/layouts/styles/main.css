@@ -1,8 +1,8 @@
 .app-main {
   width: calc(100% - var(--sidebar-width) - 4rem);
   position: fixed;
-  left: calc(var(--sidebar-width) + 2rem);
-  padding: 1rem;
+  left: var(--sidebar-width);
+  padding: 2rem;
   overflow: auto;
   height: 100vh;
 }

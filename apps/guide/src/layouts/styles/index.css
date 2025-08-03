@@ -1,10 +1,7 @@
+@import "./variables.css";
 @import "./sidebar.css";
 @import "./main.css";
 @import "./components/index.css";
-:root {
-  --app-main-color: #0b253d;
-  --sidebar-width: 180px;
-}
 
 body {
   padding: 0px;

@@ -1,7 +1,12 @@
+import React from "react";
+typeof React;
 import fs from "node:fs";
 import path from "node:path";
 import { cwd } from "node:process";
 import { Plugin } from "vite";
+import { renderToStaticMarkup } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import { pathToFileURL } from "node:url";
 
 const mergeNginxConfigFile = (addedConfig: string) => `
 server {
@@ -49,17 +54,17 @@ const getSeoDatas = (): {
   const componentSeoDatas = componentFiles.map((filename) => ({
     title: `${COMPONENT_LABEL} | ${filename}`,
     path: `/${COMPONENT_LABEL.toLocaleLowerCase()}/${filename.toLocaleLowerCase()}`,
-    description: `This page describe how to use ${filename} foundation`,
+    description: `This page describe how to use ${filename} component`,
   }));
 
   return [...foundationSeoDatas, ...componentSeoDatas];
 };
 
-const seoPlugin = (): Plugin => {
+const ssgPlugin = (): Plugin => {
   return {
     name: "rui-guide-seo-plugin",
     apply: "build",
-    closeBundle() {
+    async closeBundle() {
       const distDir = path.resolve(process.cwd(), "dist");
 
       // 기본 index.html 읽기
@@ -70,35 +75,42 @@ const seoPlugin = (): Plugin => {
 
       // 각 경로별 HTML 파일 생성
       const seoDatas = getSeoDatas();
-      seoDatas.forEach(
-        (route: { path: string; title: string; description: string }) => {
-          const url = route.path;
+      for (const route of seoDatas) {
+        const url = route.path;
 
-          const locationBlockContent = `
+        const locationBlockContent = `
             location ${url} {
               try_files $uri ${url}/index.html; 
-            }
-            
+            }            
           `;
-          if (url !== "/")
-            addedLocatinConfigContent =
-              addedLocatinConfigContent + locationBlockContent;
+        if (url !== "/")
+          addedLocatinConfigContent =
+            addedLocatinConfigContent + locationBlockContent;
 
-          // SEO 메타 태그 추가
-          const seoMetaTags = `
+        // SEO 메타 태그 추가
+        const seoMetaTags = `
           <title>${route.title || "Default Title"}</title>
           <meta name="description" content="${
             route.description || "Default description"
           }">
         `;
+        const ssrEntry = path.resolve(process.cwd(), "dist-ssr/Router.js");
+        const { default: Router } = await import(pathToFileURL(ssrEntry).href);
+        const pageHtml = renderToStaticMarkup(
+          <StaticRouter location={route.path}>
+            <Router />
+          </StaticRouter>
+        );
 
-          const finalHtml = baseHtml.replace(`<!--seo-meta-->`, seoMetaTags);
+        const finalHtml = baseHtml
+          .replace(`<!--seo-meta-->`, seoMetaTags)
+          .replace("<!--app-html-->", pageHtml);
 
-          const outputPath = path.join(distDir, url, "index.html");
-          fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-          fs.writeFileSync(outputPath, finalHtml);
-        }
-      );
+        const outputPath = path.join(distDir, url, "index.html");
+        fs.mkdirSync(path.dirname(outputPath), { recursive: true });
+        fs.writeFileSync(outputPath, finalHtml);
+      }
+      //);
 
       const nginxConfigFilePath = path.join(cwd(), "nginx.conf");
       fs.writeFileSync(
@@ -108,4 +120,4 @@ const seoPlugin = (): Plugin => {
     },
   };
 };
-export default seoPlugin;
+export default ssgPlugin;

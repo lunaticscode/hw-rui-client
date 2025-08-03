@@ -7,7 +7,6 @@ import useTranslator from "@layouts/hooks/useTranslator";
 import Carousel from "@repo/ui/Carousel";
 import { setProcessedMarkdownString } from "@utils/markdown";
 import { useEffect, useState } from "react";
-import { Trans } from "react-i18next";
 
 const CarouselGuide = () => {
   const { Trans } = useTranslator();

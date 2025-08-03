@@ -1,6 +1,6 @@
 
 # BASE STEP
-FROM node:18-alpine AS base
+FROM node:20-alpine AS base
 RUN apk update
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -9,7 +9,7 @@ COPY . .
 RUN turbo prune guide --docker
 
 # INSTALLER STEP
-FROM node:18-alpine AS installer
+FROM node:20-alpine AS installer
 RUN apk update
 RUN apk add --no-cache libc6-compat
 RUN npm install -g pnpm

@@ -1,0 +1,29 @@
+:root {
+  --app-main-color: #0b253d;
+  --sidebar-width: 180px;
+  /* Primary scale (RSuite 공식 변수 값과 일치) */
+  --rs-primary-50: #f2faff;
+  --rs-primary-100: #cce9ff;
+  --rs-primary-200: #a6d7ff;
+  --rs-primary-300: #80c4ff;
+  --rs-primary-400: #59afff;
+  --rs-primary-500: #3498ff;
+  --rs-primary-600: #2589f5;
+  --rs-primary-700: #1675e0;
+  --rs-primary-800: #0a5dc2;
+  --rs-primary-900: #004299;
+
+  /* Neutral / borders (근사치 폴백) */
+  --rs-gray-0: #ffffff;
+  --rs-gray-50: #f7f7fa; /* RSuite의 밝은 배경 톤 */
+  --rs-gray-100: #f2f2f5;
+  --rs-gray-200: #e5e5ea; /* 경계선 톤 */
+  --rs-gray-300: #d9d9dc;
+  --rs-gray-400: #c5c6c7;
+  --rs-gray-600: #8e8e93; /* 서브 텍스트 */
+  --rs-gray-700: #575757; /* 본문 텍스트 */
+
+  --rs-border-color: var(--rs-gray-200);
+  --rs-text: var(--rs-gray-700);
+  --rs-text-subtle: var(--rs-gray-600);
+}
