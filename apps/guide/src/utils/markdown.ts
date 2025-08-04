@@ -1,3 +1,11 @@
+type CustomMarkdownModule = {
+  default: string;
+};
+
+const MARKDOWN_FILES_DIRNAME = "markdowns";
+const FOUNDATION_DIR_PREFIX = "../pages/foundations/";
+const COMPONENT_DIR_PREFIX = "../pages/components/";
+
 export const setProcessedMarkdownString = (md: string) => {
   const startString = md.slice(0, 3);
   if (startString !== "```") {
@@ -5,3 +13,52 @@ export const setProcessedMarkdownString = (md: string) => {
   }
   return md;
 };
+
+const getExampleMarkdownContents = () => {
+  const foundationMarkdownFiles = import.meta.glob(
+    "../pages/foundations/**/markdowns/*.md",
+    { eager: true }
+  );
+  const mapFoundationToMarkdowns: Record<string, Record<string, string>> = {};
+
+  for (const foundationDir in foundationMarkdownFiles) {
+    const foundationName = foundationDir
+      .split(FOUNDATION_DIR_PREFIX)[1]
+      .split(`/${MARKDOWN_FILES_DIRNAME}`)[0];
+    const fileName = foundationDir
+      .split(`${MARKDOWN_FILES_DIRNAME}/`)[1]
+      .split(".md")[0];
+    mapFoundationToMarkdowns[foundationName] = {
+      ...mapFoundationToMarkdowns[foundationName],
+      [fileName]: setProcessedMarkdownString(
+        (foundationMarkdownFiles[foundationDir] as CustomMarkdownModule).default
+      ),
+    };
+  }
+
+  const componentMarkdownFiles = import.meta.glob(
+    "../pages/components/**/markdowns/*.md",
+    { eager: true }
+  );
+
+  const mapComponentToMarkdowns: Record<string, Record<string, string>> = {};
+  for (const componentDir in componentMarkdownFiles) {
+    const componentName = componentDir
+      .split(COMPONENT_DIR_PREFIX)[1]
+      .split(`/${MARKDOWN_FILES_DIRNAME}`)[0];
+
+    const fileName = componentDir
+      .split(`${MARKDOWN_FILES_DIRNAME}/`)[1]
+      .split(".md")[0];
+    mapComponentToMarkdowns[componentName] = {
+      ...mapComponentToMarkdowns[componentName],
+      [fileName]: setProcessedMarkdownString(
+        (componentMarkdownFiles[componentDir] as CustomMarkdownModule).default
+      ),
+    };
+  }
+  return { mapFoundationToMarkdowns, mapComponentToMarkdowns };
+};
+
+export const { mapFoundationToMarkdowns, mapComponentToMarkdowns } =
+  getExampleMarkdownContents();

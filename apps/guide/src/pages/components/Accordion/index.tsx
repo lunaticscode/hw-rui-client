@@ -18,6 +18,7 @@ const Guide = () => {
   const { Trans } = useTranslator();
   const [basicExampleCode, setBasicExampleCode] = useState("");
   const [installCode, setInstallCode] = useState("");
+  const setExampleCodes = () => {};
   const setUsageCodes = () => {
     import("./markdowns/Usage_BasicExample.md")
       .then((res) => {

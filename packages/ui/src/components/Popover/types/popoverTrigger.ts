@@ -1,4 +1,4 @@
-import type { ReactNode, Ref, RefCallback, RefObject } from "react";
+import type { ReactNode, Ref } from "react";
 
 export type PopoverTriggerControlledOptionalProps = Partial<{}>;
 export type PopoverTriggerControlledRequiredProps = {};

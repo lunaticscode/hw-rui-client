@@ -1,6 +1,6 @@
 import Popover from "@repo/ui/Popover";
 import useTranslator from "@layouts/hooks/useTranslator";
-import { Ref, RefObject, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { setProcessedMarkdownString } from "@utils/markdown";
 import { Install, Intro, Usage } from "@layouts/components/guides";
 import CodeBlock from "@layouts/components/CodeBlock";
