@@ -123,13 +123,20 @@ const guideFiles = new GuideFiles();
 export const routes = guideFiles.getRoutes();
 export const routeMenus = guideFiles.getRouteMenus();
 
-const getSeoData = (path: string, type: "Component" | "Foundation") => {
+const getPascalName = (name: string) => {
+  const firstChar = name[0].toUpperCase();
+  const restChars = name.slice(1);
+  return `${firstChar}${restChars}`;
+};
+
+export const getSeoData = (path: string, type: "Component" | "Foundation") => {
   return {
     path,
-    title: `${type} | ${path}`,
-    description: `Describe how to use ${path.split("/")[1]}.`,
+    title: `${type} | ${getPascalName(path.split("/")[2])}`,
+    description: `Describe how to use ${getPascalName(path.split("/")[2])}.`,
   };
 };
+
 export const seoRoutes = [
   ...routes.foundations.map((route) => getSeoData(route.path, "Foundation")),
   ...routes.components.map((route) => getSeoData(route.path, "Component")),
