@@ -6,54 +6,18 @@ import GuideTitle from "@layouts/components/GuideTitle";
 import useTranslator from "@layouts/hooks/useTranslator";
 import Button from "@repo/ui/Button";
 import Carousel from "@repo/ui/Carousel";
-import { setProcessedMarkdownString } from "@utils/markdown";
-import { useEffect, useState } from "react";
+import { COMPONENT_MARKDOWNS } from "@utils/markdown";
 
 const CarouselGuide = () => {
   const { Trans } = useTranslator();
-  const [basicExampleCode, setBasicExampleCode] = useState("");
-  const [multiItemExampleCode, setMultiItemExampleCode] = useState("");
-  const [customNavigatorCode, setCustomNavigatorCode] = useState("");
-  const [installCode, setInstallCode] = useState("");
-  const setUsageCodes = () => {
-    import("./markdowns/Usage_BasicExample.md")
-      .then((res) => {
-        return res.default;
-      })
-      .then((res) => {
-        setBasicExampleCode(setProcessedMarkdownString(res));
-      });
-    import("./markdowns/Usage_MultiItemExample.md")
-      .then((res) => {
-        return res.default;
-      })
-      .then((res) => {
-        setMultiItemExampleCode(setProcessedMarkdownString(res));
-      });
-    import("./markdowns/Usage_CustomNavigator.md")
-      .then((res) => {
-        return res.default;
-      })
-      .then((res) => {
-        setCustomNavigatorCode(setProcessedMarkdownString(res));
-      });
-  };
-  const setInstallCodes = () => {
-    import("./markdowns/Install_Code.md")
-      .then((res) => res.default)
-      .then((res) => setInstallCode(res));
-  };
-  useEffect(() => {
-    setUsageCodes();
-    setInstallCodes();
-  }, []);
+
   return (
     <>
       <Intro title={"Carousel"}>
         <Trans langKey="carousel-intro" />
       </Intro>
       <Install>
-        <CodeBlock code={installCode} />
+        <CodeBlock code={COMPONENT_MARKDOWNS["Carousel"]?.Install_Code ?? ""} />
       </Install>
       <Usage>
         <GuideTitle type="h3">Basic</GuideTitle>
@@ -69,7 +33,9 @@ const CarouselGuide = () => {
             </Carousel>
           </div>
         </ExamComponent>
-        <CodeBlock code={basicExampleCode} />
+        <CodeBlock
+          code={COMPONENT_MARKDOWNS["Carousel"]?.Usage_BasicExample ?? ""}
+        />
         <GuideDivider />
         <GuideTitle type="h3">Multi Item</GuideTitle>
         <ExamComponent>
@@ -87,7 +53,9 @@ const CarouselGuide = () => {
             </Carousel>
           </div>
         </ExamComponent>
-        <CodeBlock code={multiItemExampleCode} />
+        <CodeBlock
+          code={COMPONENT_MARKDOWNS["Carousel"]?.Usage_MultiItemExample ?? ""}
+        />
         <GuideDivider />
         <GuideTitle type="h3">Custom Navigator</GuideTitle>
         <ExamComponent>
@@ -122,7 +90,9 @@ const CarouselGuide = () => {
             </Carousel>
           </div>
         </ExamComponent>
-        <CodeBlock code={customNavigatorCode} />
+        <CodeBlock
+          code={COMPONENT_MARKDOWNS["Carousel"]?.Usage_CustomNavigator ?? ""}
+        />
       </Usage>
     </>
   );

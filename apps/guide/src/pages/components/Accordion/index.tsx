@@ -9,41 +9,22 @@ import {
 import CodeBlock from "@layouts/components/CodeBlock";
 import GuideTitle from "@layouts/components/GuideTitle";
 import useTranslator from "@layouts/hooks/useTranslator";
-import { useEffect, useState } from "react";
-import { setProcessedMarkdownString } from "@utils/markdown";
+import { COMPONENT_MARKDOWNS } from "@utils/markdown";
 import ExamComponent from "@layouts/components/ExamComponent";
 import Accordion from "@repo/ui/Accordion";
 
 const Guide = () => {
   const { Trans } = useTranslator();
-  const [basicExampleCode, setBasicExampleCode] = useState("");
-  const [installCode, setInstallCode] = useState("");
-  const setExampleCodes = () => {};
-  const setUsageCodes = () => {
-    import("./markdowns/Usage_BasicExample.md")
-      .then((res) => {
-        return res.default;
-      })
-      .then((res) => {
-        setBasicExampleCode(setProcessedMarkdownString(res));
-      });
-  };
-  const setInstallCodes = () => {
-    import("./markdowns/Install_Code.md")
-      .then((res) => res.default)
-      .then((res) => setInstallCode(res));
-  };
-  useEffect(() => {
-    setUsageCodes();
-    setInstallCodes();
-  }, []);
+
   return (
     <>
       <Intro title={"Accordion"}>
         <Trans langKey="accordion-intro" />
       </Intro>
       <Install>
-        <CodeBlock code={installCode} />
+        <CodeBlock
+          code={COMPONENT_MARKDOWNS["Accordion"]?.Install_Code ?? ""}
+        />
       </Install>
       <Usage>
         <GuideTitle type="h3">Basic</GuideTitle>
@@ -59,7 +40,9 @@ const Guide = () => {
             </Accordion.Region>
           </Accordion>
         </ExamComponent>
-        <CodeBlock code={basicExampleCode} />
+        <CodeBlock
+          code={COMPONENT_MARKDOWNS["Accordion"]?.Usage_BasicExample ?? ""}
+        />
       </Usage>
       <Props />
       <Notes />

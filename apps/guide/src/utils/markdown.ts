@@ -1,3 +1,5 @@
+import { MapComponentToMarkdowns } from "../types/generated-markdown-types";
+
 type CustomMarkdownModule = {
   default: string;
 };
@@ -41,11 +43,12 @@ const getExampleMarkdownContents = () => {
     { eager: true }
   );
 
-  const mapComponentToMarkdowns: Record<string, Record<string, string>> = {};
+  const mapComponentToMarkdowns = {} as MapComponentToMarkdowns;
+
   for (const componentDir in componentMarkdownFiles) {
     const componentName = componentDir
       .split(COMPONENT_DIR_PREFIX)[1]
-      .split(`/${MARKDOWN_FILES_DIRNAME}`)[0];
+      .split(`/${MARKDOWN_FILES_DIRNAME}`)[0] as keyof MapComponentToMarkdowns;
 
     const fileName = componentDir
       .split(`${MARKDOWN_FILES_DIRNAME}/`)[1]
@@ -57,8 +60,11 @@ const getExampleMarkdownContents = () => {
       ),
     };
   }
-  return { mapFoundationToMarkdowns, mapComponentToMarkdowns };
+  return {
+    FOUNDATION_MARKDOWNS: mapFoundationToMarkdowns,
+    COMPONENT_MARKDOWNS: mapComponentToMarkdowns,
+  };
 };
 
-export const { mapFoundationToMarkdowns, mapComponentToMarkdowns } =
+export const { FOUNDATION_MARKDOWNS, COMPONENT_MARKDOWNS } =
   getExampleMarkdownContents();

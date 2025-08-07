@@ -27,5 +27,5 @@
       "@utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["src", "plugins/seo.ts"]
+  "include": ["src", "plugins/seo.ts", "scripts"]
 }

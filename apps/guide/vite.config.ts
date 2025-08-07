@@ -2,9 +2,10 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 import ssgPlugin from "./plugins/ssg";
+import generateMarkdownTypes from "./plugins/generateMarkdownTypes";
 // https://vite.dev/config/
 export default defineConfig((config) => {
-  const buildPlugins = [react, ssgPlugin];
+  const buildPlugins = [react, generateMarkdownTypes, ssgPlugin];
   if (config.isSsrBuild) {
     buildPlugins.pop();
   }
