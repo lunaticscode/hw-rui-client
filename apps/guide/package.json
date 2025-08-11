@@ -23,6 +23,7 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
+    "@repo/registry": "workspace:*",
     "@eslint/js": "^9.21.0",
     "@types/node": "^22.13.9",
     "@types/react": "^19.0.10",

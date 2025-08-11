@@ -25,6 +25,7 @@
     "@babel/preset-react": "^7.26.3",
     "@babel/preset-typescript": "^7.26.0",
     "@repo/eslint-config": "workspace:*",
+    "@repo/registry": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.3",

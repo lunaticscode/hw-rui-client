@@ -1,0 +1,10 @@
+{
+  "name": "@repo/registry",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "./src/schemas/index.ts",
+  "devDependencies": {
+    "zod": "^4.0.16"
+  }
+}

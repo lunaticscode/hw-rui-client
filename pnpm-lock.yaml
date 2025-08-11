@@ -91,6 +91,9 @@ importers:
       '@eslint/js':
         specifier: ^9.21.0
         version: 9.22.0
+      '@repo/registry':
+        specifier: workspace:*
+        version: link:../../packages/registry
       '@types/node':
         specifier: ^22.13.9
         version: 22.13.9
@@ -240,6 +243,9 @@ importers:
       '@babel/preset-typescript':
         specifier: ^7.26.0
         version: 7.26.0(@babel/core@7.27.7)
+      '@repo/registry':
+        specifier: workspace:*
+        version: link:../registry
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -310,6 +316,12 @@ importers:
         specifier: ^8.26.0
         version: 8.26.0(eslint@9.22.0)(typescript@5.8.2)
 
+  packages/registry:
+    devDependencies:
+      zod:
+        specifier: ^4.0.16
+        version: 4.0.16
+
   packages/theme: {}
 
   packages/typescript-config: {}
@@ -341,6 +353,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
+      '@repo/registry':
+        specifier: workspace:*
+        version: link:../registry
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -4090,6 +4105,9 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod@4.0.16:
+    resolution: {integrity: sha512-Djo/cM339grjI7/HmN+ixYO2FzEMcWr/On50UlQ/RjrWK1I/hPpWhpC76heCptnRFpH0LMwrEbUY50HDc0V8wg==}
 
   zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
@@ -8574,5 +8592,7 @@ snapshots:
   yn@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@4.0.16: {}
 
   zwitch@2.0.4: {}

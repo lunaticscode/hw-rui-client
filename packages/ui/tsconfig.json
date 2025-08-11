@@ -4,9 +4,9 @@
     "outDir": "dist",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "declarationMap": false,
-    "rootDir": "src"
+    "declarationMap": false
+    // "rootDir": "src"
   },
-  "include": ["src"],
+  "include": ["src", "scripts"],
   "exclude": ["node_modules", "dist"]
 }
