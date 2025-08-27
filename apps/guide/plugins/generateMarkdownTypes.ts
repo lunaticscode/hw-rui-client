@@ -43,7 +43,6 @@ export const generate = async () => {
 export type MapFoundationToMarkdowns = {\n${foundationTypes}\n};
 export type MapComponentToMarkdowns = {\n${componentTypes}\n};
 `;
-  console.log(content);
   fs.writeFileSync(outputPath, content, "utf-8");
   console.log(`✅ Generated: ${outputPath}`);
 };
