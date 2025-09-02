@@ -1,0 +1,8 @@
+name: oci-deploy-workflow
+on:
+  push:
+    branches: [main]
+
+env:
+  RUI_GUIDE_DOCKER_IMAGE_NAME: hw-rui-guide-image
+  RUI_GUIDE_DOCKER_CONTAINER_NAME: hw-rui-guide-app-container
