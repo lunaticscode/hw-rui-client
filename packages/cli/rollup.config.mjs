@@ -33,6 +33,7 @@ export default {
   output: {
     file: "dist/index.cjs",
     format: "cjs",
+    inlineDynamicImports: true,
   },
   external: [],
   plugins: [

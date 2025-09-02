@@ -1,8 +1,7 @@
 import { execSync } from "node:child_process";
-import { readdirSync } from "node:fs";
-import { cwd } from "node:process";
 import ora from "ora";
 import prompts from "prompts";
+import { getCurrentPacakgeManager } from "../utils/packageManager";
 
 process.on("SIGINT", () => {
   console.log("(!) Exit process from [ctrl + c].");
@@ -13,29 +12,6 @@ process.on("SIGTERM", () => {
   console.log("(!) Exit process from forced terminate process.");
   process.exit(1);
 });
-
-const getCurrentPacakgeManager = () => {
-  try {
-    const filenamesFromRoot = readdirSync(cwd());
-    const lockFileRegex =
-      /^(package-lock\.json|yarn\.lock|pnpm-lock\.yaml|bun\.lockb)$/;
-    const onlyPackageLockFiles = filenamesFromRoot.filter((filename) =>
-      lockFileRegex.test(filename)
-    );
-
-    if (onlyPackageLockFiles && onlyPackageLockFiles[0]) {
-      const lockFile = onlyPackageLockFiles[0];
-      if (lockFile.includes("pnpm")) return "pnpm";
-      if (lockFile.includes("package-lock")) return "npm";
-      if (lockFile.includes("yarn")) return "yarn";
-      return "npm";
-    }
-    return "npm";
-  } catch (err) {
-    console.error(err);
-    return "npm";
-  }
-};
 
 const runAddCommand = async (components: string[]) => {
   const activeComponents: string[] = [];
