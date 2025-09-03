@@ -4,10 +4,10 @@ export type MapFoundationToMarkdowns = {
 };
 export type MapComponentToMarkdowns = {
   "Accordion": { "Install_Code"?: string; "Usage_BasicExample"?: string };
-  "Carousel": { "Install_Code"?: string; "Usage_BasicExample"?: string; "Usage_CustomNavigator"?: string; "Usage_MultiItemExample"?: string };
-  "Calendar": { "Install_Code"?: string; "Usage_BasicExample"?: string };
   "Button": { "Install_Code"?: string; "Usage_BasicExample"?: string };
+  "Calendar": { "Install_Code"?: string; "Usage_BasicExample"?: string };
   "Popover": { "Install_Code"?: string; "Usage_BasicExample"?: string; "Usage_CustomTrigger"?: string };
-  "Select": { "Install_Code"?: string; "Usage_BasicExample"?: string };
   "Tabs": { "Install_Code"?: string; "Usage_BasicExample"?: string };
+  "Carousel": { "Install_Code"?: string; "Usage_BasicExample"?: string; "Usage_CustomNavigator"?: string; "Usage_MultiItemExample"?: string };
+  "Select": { "Install_Code"?: string; "Usage_BasicExample"?: string };
 };
