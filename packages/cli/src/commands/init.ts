@@ -1,4 +1,4 @@
-import { existsSync } from "node:fs";
+import { existsSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { cwd } from "node:process";
 import chalk from "chalk";
@@ -7,8 +7,13 @@ import ora from "ora";
 import fetch from "node-fetch";
 import prompts from "prompts";
 import { HUB_BASE_REGISTRY_URL } from "../consts";
-import { getCurrentPacakgeManager } from "../utils/packageManager";
 import CliError from "../utils/error";
+import {
+  checkExistManifest,
+  existTsConfig,
+  getCurrentPacakgeManager,
+  writeManifestFile,
+} from "../utils/manifest";
 
 process.on("SIGINT", () => {
   console.log("(!) Exit process from [ctrl + c].");
@@ -52,8 +57,27 @@ const getFoundationManifest = async () => {
   }
 };
 
-const checkExistManifest = () => {
-  return existsSync(join(cwd(), "hw-rui-manifest.json"));
+type ManifestInputByPrompt = {
+  baseColor: string;
+};
+
+const createManifest = (promptInput: ManifestInputByPrompt) => {
+  try {
+    const { baseColor } = promptInput;
+    const isExistTsconfig = existTsConfig();
+    const packageManager = getCurrentPacakgeManager();
+
+    const manifest = {
+      tsx: isExistTsconfig,
+      packageManager,
+      baseColor,
+      timestamp: new Date().getTime(),
+    };
+
+    writeManifestFile(manifest);
+  } catch (err) {
+    throw new CliError("UNKNOWN_ERROR");
+  }
 };
 
 const runInitCommand = async () => {
@@ -103,10 +127,8 @@ const runInitCommand = async () => {
           value: baseColorKey,
         })),
       });
-
     console.log(`You selected baseColor is ${selectedBaseColor}.`);
-    const packageManager = getCurrentPacakgeManager();
-    console.log({ packageManager });
+    createManifest({ baseColor: selectedBaseColor });
   } catch (err) {
     throw err;
   }

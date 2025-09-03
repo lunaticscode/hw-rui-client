@@ -17,6 +17,4 @@ export const HUB_BASE_REGISTRY_URL =
     ? `${HUB_BASE_URL}/registry`
     : HUB_BASE_URL;
 
-const MANIFEST_FILENAME = "hw-rui-manifest.json";
-
 export const componentsStatusUrl = `${BASE_URL}/status.json`;

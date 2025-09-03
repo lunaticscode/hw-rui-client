@@ -1,7 +1,7 @@
 import { execSync } from "node:child_process";
 import ora from "ora";
 import prompts from "prompts";
-import { getCurrentPacakgeManager } from "../utils/packageManager";
+import { getCurrentPacakgeManager } from "../utils/manifest";
 
 process.on("SIGINT", () => {
   console.log("(!) Exit process from [ctrl + c].");
