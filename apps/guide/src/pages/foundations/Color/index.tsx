@@ -1,38 +1,37 @@
-import { API_BASE_URL } from "@utils/api";
+import { HUB_REGISTRY_BASE_URL } from "@utils/api";
 import GuideTitle from "@layouts/components/GuideTitle";
-import { useEffect, useState } from "react";
+import { CSSProperties, useEffect, useState } from "react";
+import GuideDivider from "@layouts/components/GuideDivider";
+const tempColorsWrapperStyle: CSSProperties = {
+  width: "100%",
+  display: "flex",
+};
+const tempColorTokenStyle: CSSProperties = {
+  width: "100px",
+  height: "100px",
+  marginRight: "5px",
+  borderRadius: "10px",
+};
 
-const getProcessedVariables = (variables: Record<string, string>) => {
-  const resultVariables: Record<string, Record<string, string>> = {};
-  const colorNames = Object.keys(variables)
-    .map((colorToken) => colorToken.split("--color-")[1].split("-")[0])
-    .filter((val, index, arr) => arr.indexOf(val) === index);
-
-  for (let i = 0; i < colorNames.length; i++) {
-    resultVariables[colorNames[i]] = {};
-  }
-
-  for (const colorToken in variables) {
-    const colorName = colorToken.split("--color-")[1].split("-")[0];
-    const colorValue = variables[colorToken];
-    resultVariables[colorName] = {
-      ...resultVariables[colorName],
-      [colorToken]: colorValue,
-    };
-  }
-  return resultVariables;
+const tempColorTokenKeyStyle: CSSProperties = {
+  textAlign: "center",
+  marginTop: "4px",
+  fontSize: "12px",
 };
 
 const Color = () => {
-  const [variables, setVariables] = useState<
-    Record<string, Record<string, string>>
-  >({});
-  const getColorVariables = async () => {
+  const [colors, setColors] = useState<Record<string, Record<string, string>>>(
+    {}
+  );
+
+  const setupColorVariables = async () => {
     try {
-      const req = await fetch(`${API_BASE_URL}/api/foundations/color-json`);
+      const req = await fetch(
+        `${HUB_REGISTRY_BASE_URL}/foundations/base-color.json`
+      );
       if (req.ok) {
         const colorVariables = await req.json();
-        setVariables(getProcessedVariables(colorVariables.data));
+        setColors(colorVariables);
       }
     } catch (err) {
       console.error(err);
@@ -40,40 +39,35 @@ const Color = () => {
   };
 
   useEffect(() => {
-    getColorVariables();
+    setupColorVariables();
   }, []);
   return (
     <>
       <GuideTitle>Color</GuideTitle>
-      {Object.keys(variables).map((colorName, index) => (
+      <GuideTitle type={"h3"}>Base Color</GuideTitle>
+      {Object.keys(colors).map((colorName, index) => (
         <div key={`color-name-key-${index}`}>
-          <GuideTitle type="h3">{colorName}</GuideTitle>
-          <div>
-            {Object.values(variables[colorName]).map(
-              (hex: string, index: number) => (
+          <GuideTitle type="h4">{colorName.toUpperCase()}</GuideTitle>
+          <div style={tempColorsWrapperStyle}>
+            {Object.values(colors[colorName]).map((hex, index) => (
+              <div>
                 <div
+                  key={`${colorName}-${index}-key`}
                   style={{
-                    display: "flex",
-                    alignItems: "center",
-                    columnGap: "10px",
+                    backgroundColor: hex,
+                    ...tempColorTokenStyle,
                   }}
-                >
-                  <div
-                    key={`${index}`}
-                    style={{
-                      backgroundColor: hex,
-                      width: "100px",
-                      marginBottom: "5px",
-                      height: "50px",
-                    }}
-                  />
-                  <div>{Object.keys(variables[colorName])[index]}</div>
+                />
+                <div style={tempColorTokenKeyStyle}>
+                  {`${colorName}-${Object.keys(colors[colorName])[index]}`}
                 </div>
-              )
-            )}
+              </div>
+            ))}
           </div>
+          <br />
         </div>
       ))}
+      <GuideDivider />
     </>
   );
 };

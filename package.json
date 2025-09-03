@@ -5,7 +5,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "dev:guide": "turbo run guide#dev",
-    "docker-build:guide": "docker build -t hw-rui-guide-image-0903 -f ./apps/guide/Dockerfile .",
+    "docker-build:guide": "docker build -t hw-rui-guide-image-0903:0.1 -f ./apps/guide/Dockerfile .",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
