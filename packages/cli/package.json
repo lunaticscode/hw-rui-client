@@ -9,7 +9,7 @@
     "cleanup:dev": "pnpm run build && pnpm run dev"
   },
   "bin": {
-    "hw-rui": "./dist/index.cjs"
+    "hw-rui-cli": "./dist/index.cjs"
   },
   "devDependencies": {
     "@babel/core": "^7.27.7",

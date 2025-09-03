@@ -1,8 +1,4 @@
-import { existsSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
-import { cwd } from "node:process";
 import chalk from "chalk";
-import terminalLink from "terminal-link";
 import ora from "ora";
 import fetch from "node-fetch";
 import prompts from "prompts";
@@ -10,9 +6,8 @@ import { HUB_BASE_REGISTRY_URL } from "../consts";
 import CliError from "../utils/error";
 import {
   checkExistManifest,
-  existTsConfig,
-  getCurrentPacakgeManager,
-  writeManifestFile,
+  generateManifest,
+  MANIFEST_FILENAME,
 } from "../utils/manifest";
 
 process.on("SIGINT", () => {
@@ -57,29 +52,6 @@ const getFoundationManifest = async () => {
   }
 };
 
-type ManifestInputByPrompt = {
-  baseColor: string;
-};
-
-const createManifest = (promptInput: ManifestInputByPrompt) => {
-  try {
-    const { baseColor } = promptInput;
-    const isExistTsconfig = existTsConfig();
-    const packageManager = getCurrentPacakgeManager();
-
-    const manifest = {
-      tsx: isExistTsconfig,
-      packageManager,
-      baseColor,
-      timestamp: new Date().getTime(),
-    };
-
-    writeManifestFile(manifest);
-  } catch (err) {
-    throw new CliError("UNKNOWN_ERROR");
-  }
-};
-
 const runInitCommand = async () => {
   try {
     if (checkExistManifest()) {
@@ -110,11 +82,14 @@ const runInitCommand = async () => {
     spinner.stop();
     spinner.text = `Succes to fetch foundation-manifest.`;
     spinner.succeed();
-    const hubLink = terminalLink(
-      "Show base-color in rui-hub.",
-      "https://rui-hub.hw-lab.site/foundation/color"
+
+    // console.log(hubLink); // not working...?
+    console.log(
+      "\n",
+      "You can check base-color in rui-hub.",
+      "\n",
+      "(https://rui-hub.hw-lab.site/foundation/color)"
     );
-    console.log(hubLink); // not working...?
 
     const { selectedBaseColor = "ash" }: { selectedBaseColor: string } =
       await prompts({
@@ -127,8 +102,10 @@ const runInitCommand = async () => {
           value: baseColorKey,
         })),
       });
-    console.log(`You selected baseColor is ${selectedBaseColor}.`);
-    createManifest({ baseColor: selectedBaseColor });
+    generateManifest({ baseColor: selectedBaseColor });
+    console.log(
+      `\n✅ ${chalk.greenBright(chalk.bold(`Success to initialize :) Check the manifest file.\n\n> ${MANIFEST_FILENAME}\n`))}`
+    );
   } catch (err) {
     throw err;
   }

@@ -2,15 +2,18 @@ import { HUB_REGISTRY_BASE_URL } from "@utils/api";
 import GuideTitle from "@layouts/components/GuideTitle";
 import { CSSProperties, useEffect, useState } from "react";
 import GuideDivider from "@layouts/components/GuideDivider";
+
 const tempColorsWrapperStyle: CSSProperties = {
   width: "100%",
   display: "flex",
 };
+
 const tempColorTokenStyle: CSSProperties = {
   width: "100px",
   height: "100px",
   marginRight: "5px",
   borderRadius: "10px",
+  boxShadow: "0px 0px 2px silver",
 };
 
 const tempColorTokenKeyStyle: CSSProperties = {

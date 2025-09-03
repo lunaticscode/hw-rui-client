@@ -1,7 +1,11 @@
 import { execSync } from "node:child_process";
 import ora from "ora";
 import prompts from "prompts";
-import { getCurrentPacakgeManager } from "../utils/manifest";
+import {
+  checkExistManifest,
+  getCurrentPacakgeManager,
+} from "../utils/manifest";
+import chalk from "chalk";
 
 process.on("SIGINT", () => {
   console.log("(!) Exit process from [ctrl + c].");
@@ -13,13 +17,22 @@ process.on("SIGTERM", () => {
   process.exit(1);
 });
 
-const runAddCommand = async (components: string[]) => {
-  const activeComponents: string[] = [];
-  const installableComponents: string[] = components.filter((comp: string) =>
-    activeComponents.includes(comp)
-  );
+const runAddCommand = async () => {
+  const currentPackageManager = getCurrentPacakgeManager();
 
-  if (!installableComponents || !installableComponents.length) {
+  if (!checkExistManifest()) {
+    console.log(
+      `⚠️ ${chalk.yellowBright(chalk.bold("Manifest file does not exist. Please using the command below."))}`
+    );
+    console.log(`\n${chalk.greenBright("(1) npm install -g @hw-rui-cli")}`);
+    console.log(`\n${chalk.greenBright("(2) hw-rui-cli init")}\n`);
+
+    return process.exit(0);
+  }
+
+  const installableComponents = ["accordion", "button"];
+
+  if (installableComponents.length) {
     // select components from prompt
     const { selectedComponents = [] }: { selectedComponents: string[] } =
       await prompts({
@@ -27,15 +40,13 @@ const runAddCommand = async (components: string[]) => {
         name: "selectedComponents",
         message: "Select from the installable components below.",
         hint: "Select from press Space. And submit from press Enter.",
-        choices: activeComponents.map((comp) => ({
+        choices: installableComponents.map((comp) => ({
           title: comp,
           value: `@hw-rui/${comp.toLocaleLowerCase()}`,
         })),
       });
 
     if (selectedComponents && selectedComponents.length) {
-      const currentPackageManager = getCurrentPacakgeManager();
-
       for (const componentPackageName of selectedComponents) {
         const installCli = `${currentPackageManager} add ${componentPackageName}`;
         const spinner = ora({
@@ -49,6 +60,7 @@ const runAddCommand = async (components: string[]) => {
       }
     }
   } else {
+    console.log("None installable components");
   }
 };
 

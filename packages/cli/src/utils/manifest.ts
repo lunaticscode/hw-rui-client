@@ -73,3 +73,28 @@ export const writeManifestFile = (manifest: Record<string, any>) => {
     _filesystemErrorHandling(err);
   }
 };
+
+type ManifestInputByPrompt = {
+  baseColor: string;
+};
+
+export const generateManifest = (promptInput: ManifestInputByPrompt) => {
+  try {
+    const { baseColor } = promptInput;
+    const isExistTsconfig = existTsConfig();
+    const packageManager = getCurrentPacakgeManager();
+
+    const manifest = {
+      tsx: isExistTsconfig,
+      packageManager,
+      baseColor,
+      timestamp: new Date().getTime(),
+    };
+
+    writeManifestFile(manifest);
+  } catch (err) {
+    throw new CliError("UNKNOWN_ERROR");
+  }
+};
+
+export const readManifestFile = () => {};
