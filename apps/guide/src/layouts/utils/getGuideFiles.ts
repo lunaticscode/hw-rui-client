@@ -69,6 +69,7 @@ class GuideFiles {
     components: CustomRoutes[];
   };
   readonly routeMenus: {
+    "get-started": SidebarMenu[];
     foundations: SidebarMenu[];
     components: SidebarMenu[];
   };

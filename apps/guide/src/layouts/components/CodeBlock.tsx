@@ -6,8 +6,10 @@ import { FC } from "react";
 
 interface CodeBlockProps {
   code?: string;
+  noCopy?: boolean;
 }
-const CodeBlock: FC<CodeBlockProps> = ({ code }) => {
+const CodeBlock: FC<CodeBlockProps> = (props) => {
+  const { code, noCopy } = props;
   const handleClickCopy = () => {
     if (!code) return;
     const filteredCode = code.replace(/```[a-zA-Z]+\n|```/g, "");
@@ -16,9 +18,11 @@ const CodeBlock: FC<CodeBlockProps> = ({ code }) => {
   if (!code?.trim()) return null;
   return (
     <div className={"app-guide-codeblock"}>
-      <div className={"app-guide-codeblock-copy-button"}>
-        <button onClick={handleClickCopy}>copy</button>
-      </div>
+      {noCopy ? null : (
+        <div className={"app-guide-codeblock-copy-button"}>
+          <button onClick={handleClickCopy}>copy</button>
+        </div>
+      )}
       <ReactMarkdown
         components={{
           code: (props: any) => {

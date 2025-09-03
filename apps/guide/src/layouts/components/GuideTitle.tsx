@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, useId, useMemo } from "react";
 
-type GuideTitleTags = "h2" | "h3";
+type GuideTitleTags = "h2" | "h3" | "h4";
 interface GuideTitleProps extends PropsWithChildren {
   type?: GuideTitleTags;
 }
@@ -9,6 +9,7 @@ const getTitleCls = (type: GuideTitleTags) => {
   const mapTypeToCls: { [key in GuideTitleTags]: string } = {
     h2: "app-guide-h2-title",
     h3: "app-guide-h3-title",
+    h4: "app-guide-h4-title",
   };
   return mapTypeToCls[type];
 };

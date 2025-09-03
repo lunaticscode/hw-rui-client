@@ -7,7 +7,11 @@ export type SidebarMenu = {
 };
 
 interface SidebarProps {
-  menus?: { foundations: SidebarMenu[]; components: SidebarMenu[] };
+  menus?: {
+    "get-started": SidebarMenu[];
+    foundations: SidebarMenu[];
+    components: SidebarMenu[];
+  };
 }
 
 const sidebarCls = "app-sidebar";
@@ -42,6 +46,24 @@ const Sidebar: FC<SidebarProps> = (props) => {
           🇺🇸
         </button>
       </div>
+      <Link
+        className={sidebarGroupMenuCls}
+        to={"/get-started"}
+        data-active={pathname === "/get-started"}
+      >
+        Get Started
+      </Link>
+      {menus?.["get-started"]?.map((menu, index) => (
+        <Link
+          key={`sidebar-menu-get_started-key-${index}`}
+          className={sidebarMenuCls}
+          data-active={pathname === menu.href}
+          to={menu.href}
+        >
+          {menu.label}
+        </Link>
+      ))}
+      <div className={sidebarGroupDividerCls} />
       <Link
         className={sidebarGroupMenuCls}
         to={"/foundations"}

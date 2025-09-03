@@ -5,6 +5,7 @@ type CustomMarkdownModule = {
 };
 
 const MARKDOWN_FILES_DIRNAME = "markdowns";
+const GET_STARTED_DIR_PREFIX = "../pages/get-started/";
 const FOUNDATION_DIR_PREFIX = "../pages/foundations/";
 const COMPONENT_DIR_PREFIX = "../pages/components/";
 
@@ -17,6 +18,27 @@ export const setProcessedMarkdownString = (md: string) => {
 };
 
 const getExampleMarkdownContents = () => {
+  const getStartedMarkdownFiles = import.meta.glob(
+    "../pages/get-started/**/markdowns/*.md",
+    { eager: true }
+  );
+  const mapGetStartedToMarkdowns: Record<string, Record<string, string>> = {};
+
+  for (const getStartedDir in getStartedMarkdownFiles) {
+    const getStartedName = getStartedDir
+      .split(GET_STARTED_DIR_PREFIX)[1]
+      .split(`/${MARKDOWN_FILES_DIRNAME}`)[0];
+    const fileName = getStartedDir
+      .split(`${MARKDOWN_FILES_DIRNAME}/`)[1]
+      .split(".md")[0];
+    mapGetStartedToMarkdowns[getStartedName] = {
+      ...mapGetStartedToMarkdowns[getStartedName],
+      [fileName]: setProcessedMarkdownString(
+        (getStartedMarkdownFiles[getStartedDir] as CustomMarkdownModule).default
+      ),
+    };
+  }
+
   const foundationMarkdownFiles = import.meta.glob(
     "../pages/foundations/**/markdowns/*.md",
     { eager: true }
@@ -61,10 +83,14 @@ const getExampleMarkdownContents = () => {
     };
   }
   return {
+    GET_STARTED_MARKDOWNS: mapGetStartedToMarkdowns,
     FOUNDATION_MARKDOWNS: mapFoundationToMarkdowns,
     COMPONENT_MARKDOWNS: mapComponentToMarkdowns,
   };
 };
 
-export const { FOUNDATION_MARKDOWNS, COMPONENT_MARKDOWNS } =
-  getExampleMarkdownContents();
+export const {
+  GET_STARTED_MARKDOWNS,
+  FOUNDATION_MARKDOWNS,
+  COMPONENT_MARKDOWNS,
+} = getExampleMarkdownContents();

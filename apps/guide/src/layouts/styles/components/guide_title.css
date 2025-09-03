@@ -13,3 +13,14 @@
   margin-bottom: 10px;
   font-weight: 400;
 }
+
+.app-guide-h4-title {
+  color: var(--app-main-color);
+  border-radius: 5px;
+  width: fit-content;
+
+  margin: 0px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
