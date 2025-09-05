@@ -1,8 +1,6 @@
 #!/usr/bin/env node
 import { Command } from "commander";
-import runAddCommand from "./commands/add";
-import runPromptCommand from "./commands/prompt";
-import runInitCommand from "./commands/init";
+import { runAddCommand, runInitCommand, runPromptCommand } from "./commands";
 
 const program = new Command();
 
