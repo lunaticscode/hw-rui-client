@@ -7,7 +7,7 @@ import path from "node:path";
 import { writeFileSync } from "node:fs";
 
 const getBasePkgJson = () => ({
-  version: "0.1.5",
+  version: "0.1.7",
   name: `@hw-rui/cli`,
   main: "./index.cjs",
   bin: {

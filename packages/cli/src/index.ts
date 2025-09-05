@@ -9,7 +9,7 @@ const program = new Command();
 program
   .name("hw-rui")
   .description("CLI for manage hw-rui UI components.")
-  .version("0.1.0");
+  .version("0.1.7");
 
 program
   .command("init")
