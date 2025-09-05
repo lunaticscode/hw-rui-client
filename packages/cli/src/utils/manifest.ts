@@ -31,7 +31,11 @@ const FILESYSTEM_PERMISSION_ERROR_CODES = [
 const FILESYSTEM_NOT_EXIST_ERROR_CODE = "ENOENT";
 
 export const checkExistManifest = () => {
-  return existsSync(join(cwd(), MANIFEST_FILENAME));
+  try {
+    return existsSync(join(cwd(), MANIFEST_FILENAME));
+  } catch (err) {
+    throw new CliError("FILESYSTEM_ERROR");
+  }
 };
 
 // 모노레포에서는 정확한 탐지가 불가능

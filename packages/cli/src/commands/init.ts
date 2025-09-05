@@ -83,12 +83,11 @@ const runInitCommand = async () => {
     spinner.text = `Succes to fetch foundation-manifest.`;
     spinner.succeed();
 
-    // console.log(hubLink); // not working...?
     console.log(
       "\n",
-      "You can check base-color in rui-hub.",
+      "You can check base-color in below url.",
       "\n",
-      "(https://rui-hub.hw-lab.site/foundation/color)"
+      "[url] https://rui.hw-lab.site/foundations/color\n"
     );
 
     const { selectedBaseColor = "ash" }: { selectedBaseColor: string } =

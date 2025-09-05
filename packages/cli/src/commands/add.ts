@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process";
 import ora from "ora";
 import prompts from "prompts";
+// import fetch from "node-fetch";
 import {
   checkExistManifest,
   getCurrentPacakgeManager,
@@ -17,6 +18,29 @@ process.on("SIGTERM", () => {
   process.exit(1);
 });
 
+const COMPONENT_REGISTRIES = ["components/operation-status.json"] as const;
+
+/************ temp ************/
+const installableComponents = [
+  "accordion",
+  "button",
+  "carousel",
+  "calendar",
+  "popover",
+  "select",
+  "tabs",
+  "toast",
+];
+
+const fetchHubRegistry = async (
+  registryPath: (typeof COMPONENT_REGISTRIES)[number]
+) => {
+  /************ temp ************/
+  if (registryPath === "components/operation-status.json") {
+    return { installable: installableComponents };
+  }
+};
+
 const runAddCommand = async () => {
   const currentPackageManager = getCurrentPacakgeManager();
 
@@ -26,13 +50,15 @@ const runAddCommand = async () => {
     );
     console.log(`\n${chalk.greenBright("(1) npm install -g @hw-rui-cli")}`);
     console.log(`\n${chalk.greenBright("(2) hw-rui-cli init")}\n`);
-
     return process.exit(0);
   }
 
-  const installableComponents = ["accordion", "button"];
+  const [operationStatus] = await Promise.all(
+    COMPONENT_REGISTRIES.map((registryPath) => fetchHubRegistry(registryPath))
+  );
+  const { installable } = operationStatus as { installable: string[] };
 
-  if (installableComponents.length) {
+  if (installable.length) {
     // select components from prompt
     const { selectedComponents = [] }: { selectedComponents: string[] } =
       await prompts({
@@ -40,7 +66,7 @@ const runAddCommand = async () => {
         name: "selectedComponents",
         message: "Select from the installable components below.",
         hint: "Select from press Space. And submit from press Enter.",
-        choices: installableComponents.map((comp) => ({
+        choices: installable.map((comp) => ({
           title: comp,
           value: `@hw-rui/${comp.toLocaleLowerCase()}`,
         })),

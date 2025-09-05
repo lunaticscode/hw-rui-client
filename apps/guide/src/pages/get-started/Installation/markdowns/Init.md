@@ -1,3 +1,3 @@
 ```bash
-hw-rui-cli init
+hw-rui init
 ```
